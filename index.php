@@ -4,8 +4,6 @@ session_start();
 require('src/log.php');
 require('src/connect.php');
 
-
-
 if(!empty($_POST['email']) && !empty($_POST['password'])){
 	$email 		= htmlspecialchars($_POST['email']);
 	$password 	= htmlspecialchars($_POST['password']);
@@ -37,14 +35,16 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 
 		if($password == $user['password']){
 
-			$_SESSION['connect'] = 1;
-			$_SESSION['email']   = $user['email'];
+			$_SESSION['connect']	 = 1;
+			$_SESSION['email']   	 = $user['email'];
+			$secretCode 			 = $user['secret_code'];
 
 			if (isset($_POST['auto'])) {
 				setcookie('auth', $user['secret'], time() + 364*24*3600, '/', null, false, true);
+				setcookie('secretCode', $secretCode, time() + 364*24*3600, '/', null, false, true);
 			}
 
-			header('location: index.php?success=1');
+			header('location: Netflix/main.php');
 			exit();
 
 		}
@@ -77,8 +77,8 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 		<div id="login-body">
 				<?php
 					if (isset($_SESSION['connect'])) {
-						$user = "salut";
-						header('location: Netflix/main.php?message='.$user);
+						$Code = ($_COOKIE['secretCode']);
+						header("location: Netflix/main.php?message=".$Code);
 					}else {?>
 						
 						<h1>S'identifier</h1>

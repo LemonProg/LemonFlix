@@ -1,11 +1,20 @@
 <?php
 require('../src/connect.php');
 
+$Code = $_COOKIE['secretCode'];
 
+$req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
+$req->execute(array($Code));
 
-$req = $db->prepare("SELECT pseudo, age FROM profile");
-$req->execute();
+while ($user = $req->fetch()) {
+    $req = $db->prepare("SELECT pseudo, age FROM profile".$user['id_profile']);
+    $req->execute();
 
+    while ($user = $req->fetch()) {
+
+        $pseudo = $user['pseudo'];
+    
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,9 +43,8 @@ $req->execute();
         <tr>
             <div class="profiles">
                 <?php
-                    while($pseudo = $req->fetch()) {
-                        echo('<a id="pseudo" href="#">'.$pseudo['pseudo'].'</a>');
-                    }
+                    echo('<a id="pseudo" href="#">'.$pseudo.'</a>');
+                }
                 ?>
             </div>
         </tr>
