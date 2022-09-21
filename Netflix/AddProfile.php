@@ -4,6 +4,7 @@
 
         $pseudo = htmlspecialchars($_POST['pseudo']);
         $age    = htmlspecialchars($_POST['age']);
+        $secret_code = htmlspecialchars($_POST['code']);
 
 
         if(is_int($age))  {
@@ -14,13 +15,20 @@
             exit();
         }
 
-        $req = $db->prepare("INSERT INTO profile(pseudo, age) VALUES(?,?)");
-	    $req->execute(array($pseudo, $age));
-        
-        header('location: AddProfile.php?success=1');
-	    exit();
+        $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
+	    $req->execute(array($secret_code));
+
+        while($id_profile = $req->fetch()) {
+
+            $req = $db->prepare("INSERT INTO profile".$id_profile['id_profile']."(pseudo, age) VALUES(?,?)");
+            $req->execute(array($pseudo, $age));
+            
+            header('location: AddProfile.php?success=1');
+            exit();
+        }
     }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,8 +36,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix - Profile Page</title>
-    <link rel="stylesheet" href="stylePro.css">
+    <title>Netflix - AddProfile Page</title>
+    <link rel="stylesheet" href="styleAddProfil.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -64,12 +72,17 @@
                 <p>Age</p>
                 <input type="number" name="age" id="form" required>
             </td>
+            <td>
+                <p>Code Secret</p>
+                <input type="text" name="code" id="form" required>
+            </td>
             <br>
             <input type="submit" value="Ajouter" id="valBtn">
         </form>
     </div>
 
     <footer>
+        <a href="LostSecretCode.php">(j'ai oublier mon code secret)</a>
         <p class="footer">&copy; Copyright 2022 – LemonFlix</p>
     </footer>
 </body>

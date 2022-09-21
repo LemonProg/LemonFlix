@@ -2,10 +2,11 @@
 session_start();
 
 require('src/log.php');
+require('src/connect.php');
+
+
 
 if(!empty($_POST['email']) && !empty($_POST['password'])){
-	require('src/connect.php');
-
 	$email 		= htmlspecialchars($_POST['email']);
 	$password 	= htmlspecialchars($_POST['password']);
 
@@ -49,7 +50,7 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 		}
 		else {
 
-			header('location: index.php?error=1&Impossible de vous authentifier correctement.');
+			header('location: index.php?error=1&message=Impossible de vous authentifier correctement.');
 			exit();
 
 		}
@@ -76,8 +77,8 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 		<div id="login-body">
 				<?php
 					if (isset($_SESSION['connect'])) {
-						header('location: Netflix/main.php');
-						exit();
+						$user = "salut";
+						header('location: Netflix/main.php?message='.$user);
 					}else {?>
 						
 						<h1>S'identifier</h1>
@@ -102,7 +103,7 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 
 						<p class="grey">Première visite sur Netflix ? <a href="inscription.php">Inscrivez-vous</a>.</p>
 						
-					<?php } ?>
+					<?php }?>
 		</div>
 	</section>
 

@@ -1,6 +1,8 @@
 <?php
 require('../src/connect.php');
 
+
+
 $req = $db->prepare("SELECT pseudo, age FROM profile");
 $req->execute();
 
@@ -13,7 +15,7 @@ $req->execute();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix - Main Page</title>
-    <link rel="stylesheet" href="styleMain.css">
+    <link rel="stylesheet" href="../styleMain.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -24,7 +26,7 @@ $req->execute();
                 <a id="logout" href="../logout.php">Déconnexion</a>
             </div>
         </form>
-        
+    
     </header>
     <h1>Qui est-ce?</h1>
     
@@ -43,6 +45,7 @@ $req->execute();
         <div id="divProfiles">
             <a id="addProfiles"href="profiles.php">Gérer les profils</a>
         </div>
+        <a href="LostSecretCode.php" id="code">(j'ai oublier mon code secret)</a>
         <p class="footer">&copy; Copyright 2022 – LemonFlix</p>
     </footer>
 </body>

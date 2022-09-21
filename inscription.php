@@ -38,14 +38,29 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passw
 
 		}
 	}
-
+	
 	$secret = sha1($email).time();
 	$secret = sha1($secret).time();
 
 	$password = "aq1".sha1($password."123")."25";
 
-	$req = $db->prepare("INSERT INTO user(email, password, secret) VALUES(?,?,?)");
-	$req->execute(array($email, $password, $secret));
+	function randLetter() {
+		$int = rand(0,51);
+		$a_z = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		$rand_letter = $a_z[$int];
+        return $rand_letter;
+	}
+
+	function randNumber() {
+		$int = rand(0, 10);
+        return $int;
+	}
+
+	$secretCode = randLetter().randLetter().randLetter().randNumber().randNumber();
+	echo($secretCode);
+
+	$req = $db->prepare("INSERT INTO user(email, password, secret, secret_code) VALUES(?,?,?,?)");
+	$req->execute(array($email, $password, $secret, $secretCode));
 
 	header('location: inscription.php?success=1');
 	exit();
