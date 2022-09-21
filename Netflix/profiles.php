@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <form action="../index.php" id="logo">
+        <form action="main.php" id="logo">
             <input type="image" src="../img/logo.png" alt="Submit">
             <div id="logoutDiv">
                 <a id="logout" href="../logout.php">Déconnexion</a>

@@ -72,17 +72,12 @@
                 <p>Age</p>
                 <input type="number" name="age" id="form" required>
             </td>
-            <td>
-                <p>Code Secret</p>
-                <input type="text" name="code" id="form" required>
-            </td>
             <br>
             <input type="submit" value="Ajouter" id="valBtn">
         </form>
     </div>
 
     <footer>
-        <a href="LostSecretCode.php">(j'ai oublier mon code secret)</a>
         <p class="footer">&copy; Copyright 2022 – LemonFlix</p>
     </footer>
 </body>

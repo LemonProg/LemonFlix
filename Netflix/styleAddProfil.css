@@ -113,15 +113,6 @@ footer p{
     text-align: center;
 }
 
-footer a {
-    text-align: left;
-    position:absolute;
-    bottom:0;
-    padding-bottom: 23px;
-    padding-left: 20px;
-    z-index: 1;
-}
-
 .footer {
     font-size: 20px;
     cursor: default;

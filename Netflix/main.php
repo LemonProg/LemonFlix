@@ -29,7 +29,7 @@ while ($user = $req->fetch()) {
 </head>
 <body>
     <header>
-        <form action="../index.php" id="logo">
+        <form action="main.php" id="logo">
             <input type="image" src="../img/logo.png" alt="Submit">
             <div id="logoutDiv">
                 <a id="logout" href="../logout.php">Déconnexion</a>
@@ -53,7 +53,6 @@ while ($user = $req->fetch()) {
         <div id="divProfiles">
             <a id="addProfiles"href="profiles.php">Gérer les profils</a>
         </div>
-        <a href="LostSecretCode.php" id="code">(j'ai oublier mon code secret)</a>
         <p class="footer">&copy; Copyright 2022 – LemonFlix</p>
     </footer>
 </body>
