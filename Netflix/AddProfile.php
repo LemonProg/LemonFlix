@@ -4,6 +4,7 @@
 
         $pseudo      = htmlspecialchars($_POST['pseudo']);
         $age         = htmlspecialchars($_POST['age']);
+        $url         = htmlspecialchars($_POST['url']);
         $secret_code = htmlspecialchars($_COOKIE['secretCode']);
 
 
@@ -22,8 +23,8 @@
 
         while($id_profile = $req->fetch()) {
 
-            $req = $db->prepare("INSERT INTO profile".$id_profile['id_profile']."(pseudo, age) VALUES(?,?)");
-            $req->execute(array($pseudo, $age));
+            $req = $db->prepare("INSERT INTO profile".$id_profile['id_profile']."(pseudo, age, url) VALUES(?,?,?)");
+            $req->execute(array($pseudo, $age, $url));
             
             header('location: AddProfile.php?success=1');
             exit();
@@ -73,6 +74,10 @@
             <td>
                 <p>Age</p>
                 <input type="number" name="age" id="form" required>
+            </td>
+            <td>
+                <p>Photo de Profile</p>
+                <input type="url" name="url" id="form" required>
             </td>
             <br>
             <input type="submit" value="Ajouter" id="valBtn">

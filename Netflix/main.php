@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix - Main Page</title>
-    <link rel="stylesheet" href="../styleMain.css">
+    <link rel="stylesheet" href="styleMain.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -32,14 +32,21 @@
                     $req->execute(array($Code));
                     
                     while ($user = $req->fetch()) {
-                        $req = $db->prepare("SELECT pseudo, age FROM profile".$user['id_profile']);
+                        $req = $db->prepare("SELECT * FROM profile".$user['id_profile']);
                         $req->execute();
                     
                         while ($user = $req->fetch()) {
-                    
+
                             $pseudo = $user['pseudo'];
-                            
-                            echo('<a id="pseudo" href="#">'.$pseudo.'</a>');
+                            $url = $user['url'];
+
+                            echo('
+                            <div class="container">
+                                <img src='.$url.'>
+                                <p id="pseudo">'.$pseudo.'</p>                     
+                            </div>
+                            ');
+                            // 
                         }
                     }
                 ?>

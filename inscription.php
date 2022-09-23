@@ -59,8 +59,27 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passw
 	$secretCode = randLetter().randLetter().randLetter().randNumber().randNumber();
 	echo($secretCode);
 
-	$req = $db->prepare("INSERT INTO user(email, password, secret, secret_code) VALUES(?,?,?,?)");
-	$req->execute(array($email, $password, $secret, $secretCode));
+	$req = $db->prepare("SELECT * FROM user ORDER BY id DESC LIMIT 1");
+	$req->execute();
+
+	while ($user = $req->fetch()) {
+		$id_profile = $user['id_profile'];
+		$int_profile = intval($id_profile);
+		$result_profile = $int_profile += 1;
+
+
+		$req = $db->prepare("INSERT INTO user(email, password, secret, secret_code, id_profile) VALUES(?,?,?,?,?)");
+		$req->execute(array($email, $password, $secret, $secretCode, $result_profile));
+
+		$req = $db->prepare("CREATE TABLE profile$result_profile (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			`pseudo` TEXT NOT NULL,
+			`age` INT NOT NULL,
+			`url` TEXT NOT NULL)");
+		$req->execute();
+	}
+
+	
 
 	header('location: inscription.php?success=1');
 	exit();
