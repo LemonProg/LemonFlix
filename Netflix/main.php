@@ -1,22 +1,3 @@
-<?php
-require('../src/connect.php');
-
-$Code = $_COOKIE['secretCode'];
-
-$req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
-$req->execute(array($Code));
-
-while ($user = $req->fetch()) {
-    $req = $db->prepare("SELECT pseudo, age FROM profile".$user['id_profile']);
-    $req->execute();
-
-    while ($user = $req->fetch()) {
-
-        $pseudo = $user['pseudo'];
-    
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +10,7 @@ while ($user = $req->fetch()) {
 </head>
 <body>
     <header>
-        <form action="main.php" id="logo">
+        <form action="../index.php" id="logo">
             <input type="image" src="../img/logo.png" alt="Submit">
             <div id="logoutDiv">
                 <a id="logout" href="../logout.php">Déconnexion</a>
@@ -43,8 +24,24 @@ while ($user = $req->fetch()) {
         <tr>
             <div class="profiles">
                 <?php
-                    echo('<a id="pseudo" href="#">'.$pseudo.'</a>');
-                }
+                    require('../src/connect.php');
+
+                    $Code = htmlspecialchars($_COOKIE['secretCode']);
+                    
+                    $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
+                    $req->execute(array($Code));
+                    
+                    while ($user = $req->fetch()) {
+                        $req = $db->prepare("SELECT pseudo, age FROM profile".$user['id_profile']);
+                        $req->execute();
+                    
+                        while ($user = $req->fetch()) {
+                    
+                            $pseudo = $user['pseudo'];
+                            
+                            echo('<a id="pseudo" href="#">'.$pseudo.'</a>');
+                        }
+                    }
                 ?>
             </div>
         </tr>

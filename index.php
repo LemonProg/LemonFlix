@@ -77,8 +77,8 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 		<div id="login-body">
 				<?php
 					if (isset($_SESSION['connect'])) {
-						$Code = ($_COOKIE['secretCode']);
-						header("location: Netflix/main.php?message=".$Code);
+						$Code = htmlspecialchars($_COOKIE['secretCode']);
+						header("location: Netflix/main.php");
 					}else {?>
 						
 						<h1>S'identifier</h1>

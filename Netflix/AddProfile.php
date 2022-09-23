@@ -2,9 +2,9 @@
     if(!empty($_POST['pseudo']) && (!empty($_POST['age']))) {
         require('../src/connect.php');
 
-        $pseudo = htmlspecialchars($_POST['pseudo']);
-        $age    = htmlspecialchars($_POST['age']);
-        $secret_code = htmlspecialchars($_POST['code']);
+        $pseudo      = htmlspecialchars($_POST['pseudo']);
+        $age         = htmlspecialchars($_POST['age']);
+        $secret_code = htmlspecialchars($_COOKIE['secretCode']);
 
 
         if(is_int($age))  {
@@ -14,6 +14,8 @@
             header("location: AddProfile.php?error=1&message=Votre age n'est pas valide.");
             exit();
         }
+
+        
 
         $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
 	    $req->execute(array($secret_code));

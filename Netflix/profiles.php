@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix - Profile Page</title>
-    <link rel="stylesheet" href="styleProfils.css">
+    <link rel="stylesheet" href="styleProfiles.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
     <header>
-        <form action="main.php" id="logo">
+        <form action="../index.php" id="logo">
             <input type="image" src="../img/logo.png" alt="Submit">
             <div id="logoutDiv">
                 <a id="logout" href="../logout.php">Déconnexion</a>
@@ -19,6 +19,11 @@
     </header>
     <div class="container">
         <a id="createProfile" href="AddProfile.php">Créer un profile</a> 
+        <br>
+        <div class="DeleteDiv">
+            <a id="deleteProfile" href="DelProfile.php">Supprimer un profile</a> 
+        </div>
+        
     </div>
     <footer>
         <p class="footer">&copy; Copyright 2022 – LemonFlix</p>
