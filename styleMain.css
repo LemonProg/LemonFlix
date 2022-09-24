@@ -28,6 +28,7 @@ h1 {
     text-align: center;
 }
 
+
 a {
     text-decoration: none;
     color: white;
@@ -47,6 +48,7 @@ a:hover {
 
 #email {
     color: white;
+    margin-top: 0px;
 }
 
 #logoutDiv {

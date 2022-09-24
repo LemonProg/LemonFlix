@@ -36,8 +36,6 @@
             <div class="profiles">
                 <?php
                     
-                    
-                    
                         $req = $db->prepare("SELECT * FROM profile".$user['id_profile']);
                         $req->execute();
                     

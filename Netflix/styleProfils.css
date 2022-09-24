@@ -64,12 +64,26 @@ footer {
     color: rgb(253, 86, 86);
 }
 
-#createProfile {
+#createProfile{
     font-size: 50px;
 }
 
+#deleteProfile {
+    font-size: 50px;
+}
+
+.DeleteDiv {
+    margin-top: 70px;
+}
+
 .container {
-    margin-top: 200px;
+    margin-top: 270px;
     text-align: center;
 }
+
+#email {
+    color: white;
+    margin-top: 0px;
+}
+
 
