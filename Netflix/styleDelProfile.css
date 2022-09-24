@@ -28,17 +28,13 @@ h1 {
     margin-top: 50px;
 }
 
-form[id="logo"] p {
+h2 {
     color: white;
-    text-align: right;
-    margin-top: 0px;
-    margin-right: 27px;
+    font-size: 35px;
+    margin-top: 150px;
+    margin-bottom: 100px;
 }
 
-form[id="Forumlaire"] {
-    color: white;
-    font-size: 30px;
-}
 
 .container {
     text-align: center;
@@ -67,7 +63,6 @@ a:hover {
     text-decoration: underline;
 }
 
-
 #logout {
     font-size: 20px;
 } 
@@ -87,13 +82,11 @@ a:hover {
 
 }
 
-.form {
-    font-size: 30px;
-    background-color: #666666;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
+#pseudo {
+    margin: 70px;
+    font-size: 50px;
 }
+
 
 #valBtn {
     margin-top: 45px;
@@ -130,4 +123,16 @@ footer p{
 
 .footer:hover {
     color: rgb(253, 86, 86);
+}
+
+form[id="logo"] p {
+    color: white;
+    text-align: right;
+    margin-top: 0px;
+    margin-right: 27px;
+}
+
+form[id="Forumlaire"] {
+    color: white;
+    font-size: 30px;
 }

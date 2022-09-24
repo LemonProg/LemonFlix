@@ -64,7 +64,7 @@
         </form>
     </header>
     <div class="container">
-        <form method="post" action="AddProfile.php">
+        <form method="post" action="AddProfile.php" id="Forumlaire">
             <h1>Ajout d'un  utilisateur</h1>
             <?php
 
@@ -80,15 +80,15 @@
             ?>
             <td>
                 <p class="prenom">Prénom</p>
-                <input type="text" name="pseudo" id="form" required>
+                <input type="text" name="pseudo" class="form" required>
             </td>
             <td>
                 <p>Age</p>
-                <input type="number" name="age" id="form" required>
+                <input type="number" name="age" class="form" required>
             </td>
             <td>
                 <p>Photo de Profile</p>
-                <input type="url" name="url" id="form" required>
+                <input type="url" name="url" class="form" required>
             </td>
             <br>
             <input type="submit" value="Ajouter" id="valBtn">
