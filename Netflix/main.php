@@ -42,8 +42,10 @@
 
                             echo('
                             <div class="container">
-                                <img src='.$url.'>
-                                <p id="pseudo">'.$pseudo.'</p>                     
+                                <form action="../index.php">
+                                    <input id="pp" type="image" src="'.$url.'" alt="Submit">
+                                    <p id="pseudo">'.$pseudo.'</p>                 
+                                </form>
                             </div>
                             ');
                             // 

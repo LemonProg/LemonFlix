@@ -69,7 +69,7 @@ footer p{
 .footer {
     font-size: 20px;
     cursor: default;
-    transition: 0.4s;
+    transition: 0.2s;
     color: white;
 }
 
@@ -85,16 +85,12 @@ footer p{
 #addProfiles {
     font-size: 30px;
     color: #666666;
-}
-
-#divProfiles {
-    margin-top: 300px;
     text-align: center;
-}
 
+}
 
 #addProfiles:hover {
-    color: rgb(255, 255, 255);
+    color: white;
 }
 
 #FormPro {
@@ -102,15 +98,16 @@ footer p{
     transition: 0.4s;
 }
 
-img {
+#pp {
     height: 200px;
     width: 200px;
     border-radius: 5px;
     transition: 0.1s;
     border: 3px solid #141414;
+    cursor: pointer;
 }
 
-img:hover {
+#pp:hover {
     transform: scale(0.9);
     border: 3px solid white;
     transition: 0.1s;
@@ -118,13 +115,14 @@ img:hover {
 
 #pseudo:hover {
     color: white;
-    cursor: pointer;
+    cursor: default;
 }
 
 #pseudo {
     margin: 25px 100px 0px 100px;
     font-size: 20px;
     color: rgb(90, 90, 90);
+    transition: 0.2s;
 }
 
 .container {
