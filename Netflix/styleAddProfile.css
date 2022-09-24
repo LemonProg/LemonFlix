@@ -40,6 +40,11 @@ form[id="Forumlaire"] {
     font-size: 30px;
 }
 
+form[id="Forumlaire"] a {
+    color: white;
+    font-size: 30px;
+}
+
 .container {
     text-align: center;
 }

@@ -54,6 +54,11 @@ h2 {
 
 }
 
+.alert p{
+    font-size: 20px;
+
+}
+
 a {
     color: white;
     text-decoration: none;
@@ -79,8 +84,10 @@ a:hover {
     text-align: center;
     padding: 7px;
     border-radius: 5px;
+    font-size: 20px;
 
 }
+
 
 #pseudo {
     margin: 70px;
@@ -135,4 +142,8 @@ form[id="logo"] p {
 form[id="Forumlaire"] {
     color: white;
     font-size: 30px;
+}
+
+p {
+    color: white;
 }

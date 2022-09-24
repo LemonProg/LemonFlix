@@ -89,6 +89,8 @@
             <td>
                 <p>Photo de Profile</p>
                 <input type="url" name="url" class="form" required>
+                <br>
+                <a href="https://online-hoster.000webhostapp.com/" id="website">Site d'hébergement en ligne</a>
             </td>
             <br>
             <input type="submit" value="Ajouter" id="valBtn">
