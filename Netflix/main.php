@@ -46,7 +46,7 @@
 
                             echo('
                             <div class="container">
-                                <form action="../index.php">
+                                <form action="../Streaming/index.php">
                                     <input id="pp" type="image" src="'.$url.'" alt="Submit">
                                     <p id="pseudo">'.$pseudo.'</p>                 
                                 </form>
