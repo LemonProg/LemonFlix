@@ -30,8 +30,8 @@ h1 {
 
 h2 {
     color: white;
-    font-size: 35px;
-    margin-top: 150px;
+    font-size: 30px;
+    margin-top: 50px;
     margin-bottom: 100px;
 }
 
@@ -146,4 +146,37 @@ form[id="Forumlaire"] {
 
 p {
     color: white;
+}
+
+#pseudo:hover {
+    color: white;
+    cursor: default;
+}
+
+#pseudo {
+    margin: 25px 100px 0px 100px;
+    font-size: 20px;
+    color: rgb(90, 90, 90);
+    transition: 0.2s;
+}
+
+#pp {
+    height: 200px;
+    width: 200px;
+    border-radius: 5px;
+    transition: 0.1s;
+    border: 3px solid #141414;
+    cursor: pointer;
+}
+
+#pp:hover {
+    transform: scale(0.9);
+    border: 3px solid white;
+    transition: 0.1s;
+}
+
+.containerImage {
+    display: inline-block;
+    overflow: auto;
+    
 }

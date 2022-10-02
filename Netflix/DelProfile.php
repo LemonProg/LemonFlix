@@ -34,7 +34,7 @@ require('../src/connect.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix - Delete Profile</title>
-    <link rel="stylesheet" href="styleDelProfile.css">
+    <link rel="stylesheet" href="styleDelProfiles.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -59,31 +59,43 @@ require('../src/connect.php');
     </header>
     <div class="container">
         <h1>Suppression d'un  utilisateur</h1>
-        <h2>Appuyiez pour supprimer :</h2>
-        <?php
-
+        <?php 
             if(isset($_GET['error'])) {
                 if(isset($_GET['message'])) {
                     echo '<p class="alert">'.htmlspecialchars($_GET['message']).'</p>';
                 }
             }else if (isset($_GET['success'])) {
                 echo '<p class="success">Votre Profile a bien été a supprimé.</p>';
-                echo '<p>Retour au <a href="main.php">Menu Principale</a>.</p>';
             }
+        ?>
+        <h2>Appuyiez pour supprimer :</h2>
+        <?php
             $Code = htmlspecialchars($_COOKIE['secretCode']);
             
             $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
             $req->execute(array($Code));
             
             while ($user = $req->fetch()) {
-                $req = $db->prepare("SELECT pseudo, age FROM profile".$user['id_profile']);
+                $req = $db->prepare("SELECT * FROM profile".$user['id_profile']);
                 $req->execute();
             
                 while ($user = $req->fetch()) {
             
                     $pseudo = $user['pseudo'];
+                    $url = $user['url'];
                     
-                    echo('<a id="pseudo" href="DelProfile.php?pseudo='.$pseudo.'">'.$pseudo.'</a>');
+                    if(isset($_GET['del'])) {
+                        header("location: DelProfile.php?pseudo=".$pseudo);
+                    }
+
+                    echo('
+                    <div class="containerImage">
+                        <form method="post" action="DelProfile.php?del=true">
+                            <input id="pp" type="image" src="'.$url.'" alt="Submit">
+                            <p id="pseudo">'.$pseudo.'</p>
+                        </form>
+                    </div>
+                    ');
                 }
             }
         ?>
