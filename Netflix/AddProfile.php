@@ -40,7 +40,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix - AddProfile Page</title>
-    <link rel="stylesheet" href="styleAddProfile.css">
+    <link rel="stylesheet" href="styleAddProfiles.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -74,7 +74,6 @@
                     }
                 }else if (isset($_GET['success'])) {
                     echo '<p class="success">Votre Profile a bien été ajouter.</p>';
-                    echo '<p>Retour au <a href="main.php">Menu Principale</a>.</p>';
                 }
 
             ?>
@@ -90,9 +89,11 @@
                 <p>Photo de Profile</p>
                 <input type="url" name="url" class="form" required>
                 <br>
-                <a href="https://online-hoster.000webhostapp.com/" id="website">Site d'hébergement en ligne</a>
+                <div id="websiteDiv">
+                    <a href="https://online-hoster.000webhostapp.com/" id="website">Site d'hébergement en ligne</a>
+                </div>
+                
             </td>
-            <br>
             <input type="submit" value="Ajouter" id="valBtn">
         </form>
     </div>

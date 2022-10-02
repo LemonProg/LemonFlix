@@ -37,7 +37,7 @@ form[id="logo"] p {
 
 form[id="Forumlaire"] {
     color: white;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 form[id="Forumlaire"] a {
@@ -106,7 +106,7 @@ a:hover {
     background-color: white;
     color: black;
     padding: 10px 30px 10px 30px;
-    transition: 0.3s;
+    transition: 0.25s;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -135,4 +135,17 @@ footer p{
 
 .footer:hover {
     color: rgb(253, 86, 86);
+}
+
+#website {
+    font-size: 20px;
+    color: #666666;
+}
+
+#website:hover {
+    color: white;
+}
+
+#websiteDiv {
+    margin-top: 15px;
 }
