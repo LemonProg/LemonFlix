@@ -56,8 +56,8 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passw
         return $int;
 	}
 
-	$secretCode = randLetter().randLetter().randLetter().randNumber().randNumber();
-	echo($secretCode);
+	$secretCode = sha1(randLetter().randLetter().randLetter().randNumber().randNumber());
+	
 
 	$req = $db->prepare("SELECT * FROM user ORDER BY id DESC LIMIT 1");
 	$req->execute();
