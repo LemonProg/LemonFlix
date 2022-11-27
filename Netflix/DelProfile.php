@@ -1,28 +1,37 @@
 <?php
 require('../src/connect.php');
 
-    if(isset($_GET['pseudo'])) {
-        $pseudo      = htmlspecialchars($_GET['pseudo']);
-        $secret_code = htmlspecialchars($_COOKIE['secretCode']);
+if(isset($_POST['pseudo'])) {
+    $pseudo      = htmlspecialchars($_POST['pseudo']);
+    $secret_code = htmlspecialchars($_COOKIE['secretCode']);
 
-        $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
-	    $req->execute(array($secret_code));
+    $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
+    $req->execute(array($secret_code));
 
+
+    while($user = $req->fetch()) {
+        $userProfile = $user['id_profile'];
+
+        $req = $db->prepare("SELECT * FROM profile".$userProfile);
+        $req->execute();
 
         while($user = $req->fetch()) {
-            $userProfile = $user['id_profile'];
-
-            $req = $db->prepare("SELECT * FROM profile".$userProfile);
-	        $req->execute();
-
-            $req = $db->prepare("DELETE FROM profile$userProfile WHERE pseudo = ?");
-            $req->execute(array($pseudo));
-
-            header('location: DelProfile.php?success=1');
-            exit();
-            }
             
+            if ($pseudo == $user['pseudo']) {
+                $req = $db->prepare("DELETE FROM profile$userProfile WHERE pseudo = ?");
+                $req->execute(array($pseudo));
+
+                header('location: DelProfile.php?success=1');
+                exit();
+            }else {
+                header('location: DelProfile.php?error=1');
+            }
         }
+
+        
+        }
+        
+    }
     
 ?>
 
@@ -59,16 +68,6 @@ require('../src/connect.php');
     </header>
     <div class="container">
         <h1>Suppression d'un  utilisateur</h1>
-        <?php 
-            if(isset($_GET['error'])) {
-                if(isset($_GET['message'])) {
-                    echo '<p class="alert">'.htmlspecialchars($_GET['message']).'</p>';
-                }
-            }else if (isset($_GET['success'])) {
-                echo '<p class="success">Votre Profile a bien été a supprimé.</p>';
-            }
-        ?>
-        <h2>Appuyiez pour supprimer :</h2>
         <?php
             $Code = htmlspecialchars($_COOKIE['secretCode']);
             
@@ -83,23 +82,30 @@ require('../src/connect.php');
             
                     $pseudo = $user['pseudo'];
                     $url = $user['url'];
-                    
-                    if(isset($_GET['del'])) {
-                        header("location: DelProfile.php?pseudo=".$pseudo);
-                    }
 
                     echo('
                     <div class="containerImage">
-                        <form method="post" action="DelProfile.php?del=true">
-                            <input id="pp" type="image" src="'.$url.'" alt="Submit">
-                            <p id="pseudo">'.$pseudo.'</p>
-                        </form>
+                        <img id="pp" src="'.$url.'">
+                        <p id="pseudo">'.$pseudo.'</p>
                     </div>
                     ');
                 }
             }
         ?>
+        <form action="DelProfile.php" method="post" id="pseudo_form">
+            <input type="text" name="pseudo" id="pseudo_input" placeholder="Veuillez inscrire un Utilisateur à supprimer : " required>
+            <input type="submit" value="Valider" id="pseudo_submit">
+        </form>
     </div>
+
+    <?php 
+        if(isset($_GET['error'])) {
+            echo "<script src='js/input_error.js'></script>";
+        }
+        if (isset($_GET['success'])) {
+            echo "<script src='js/input_success.js'></script>";
+        }
+    ?>
 
     <footer>
         <p class="footer">&copy; Copyright 2022 – LemonFlix</p>

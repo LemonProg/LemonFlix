@@ -4,8 +4,8 @@ html {
 }
 
 body {
-    overflow: hidden;
-  }
+    overflow-x: hidden;
+}
 
 #logo input {
 	padding: 20px 0 0 70px;
@@ -31,28 +31,12 @@ h1 {
 h2 {
     color: white;
     font-size: 30px;
-    margin-top: 50px;
-    margin-bottom: 100px;
 }
-
 
 .container {
     text-align: center;
 }
 
-.prenom {
-    margin-top: 50px;
-}
-
-.alert {
-    background-color: red;
-    width: 500px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 7px;
-    border-radius: 5px;
-
-}
 
 .alert p{
     font-size: 20px;
@@ -85,34 +69,8 @@ a:hover {
     padding: 7px;
     border-radius: 5px;
     font-size: 20px;
-
+    margin-bottom: 20px;
 }
-
-
-#pseudo {
-    margin: 70px;
-    font-size: 50px;
-}
-
-
-#valBtn {
-    margin-top: 45px;
-    font-size: 25px;
-    background-color: white;
-    color: black;
-    padding: 10px 30px 10px 30px;
-    transition: 0.3s;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#valBtn:hover {
-    background-color: red;
-    color: white;
-    transform: scale(0.9);
-} 
-
 
 footer p{
     position:absolute;
@@ -139,11 +97,6 @@ form[id="logo"] p {
     margin-right: 40px;
 }
 
-form[id="Forumlaire"] {
-    color: white;
-    font-size: 30px;
-}
-
 p {
     color: white;
 }
@@ -154,29 +107,48 @@ p {
 }
 
 #pseudo {
-    margin: 25px 100px 0px 100px;
+    margin: 15px 100px 0px 100px;
     font-size: 20px;
     color: rgb(90, 90, 90);
     transition: 0.2s;
 }
 
 #pp {
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     border-radius: 5px;
-    transition: 0.1s;
     border: 3px solid #141414;
-    cursor: pointer;
-}
-
-#pp:hover {
-    transform: scale(0.9);
-    border: 3px solid white;
-    transition: 0.1s;
+    cursor: default;
+    margin-top: 25px;
 }
 
 .containerImage {
     display: inline-block;
-    overflow: auto;
-    
+}
+
+#pseudo_form {
+    margin-top: 80px;
+}
+
+#pseudo_input {
+    padding: 15px;
+    font-size: 15px;
+    width: 50%;
+    border-radius: 7px;
+    border: silver solid 3px;
+    outline: none;
+}
+
+#pseudo_submit {
+    padding: 15px 30px 15px 30px;
+    border-radius: 7px;
+    margin-left: 5px;
+    transition: 0.1s;
+    border: silver solid 3px;
+}
+
+#pseudo_submit:hover {
+    transition: 0.1s;
+    cursor: pointer;
+    transform: scale(0.9);
 }

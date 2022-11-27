@@ -31,11 +31,10 @@
     </header>
     <h1>Qui est-ce?</h1>
     
-    <form id="FormPro">
+    <form id="FormPro" action="../Streaming/index.php">
         <tr>
             <div class="profiles">
                 <?php
-                    
                         $req = $db->prepare("SELECT * FROM profile".$user['id_profile']);
                         $req->execute();
                     
@@ -47,12 +46,11 @@
                             echo('
                             <div class="container">
                                 <form action="../Streaming/index.php">
-                                    <input id="pp" type="image" src="'.$url.'" alt="Submit">
-                                    <p id="pseudo">'.$pseudo.'</p>                 
+                                    <input type="image" src="'.$url.'" id="pp" value="Submit" name="'.$pseudo.'">
+                                    <p id="pseudo">'.$pseudo.'</p>
                                 </form>
                             </div>
                             ');
-                            // 
                         }
                     }
                 ?>
