@@ -31,7 +31,7 @@
     </header>
     <h1>Qui est-ce?</h1>
     
-    <form id="FormPro" action="../Streaming/index.php">
+    <form id="FormPro" action="../Streaming/index.php" method="post">
         <tr>
             <div class="profiles">
                 <?php
@@ -39,15 +39,15 @@
                         $req->execute();
                     
                         while ($user = $req->fetch()) {
-
                             $pseudo = $user['pseudo'];
                             $url = $user['url'];
 
                             echo('
                             <div class="container">
-                                <form action="../Streaming/index.php">
-                                    <input type="image" src="'.$url.'" id="pp" value="Submit" name="'.$pseudo.'">
-                                    <p id="pseudo">'.$pseudo.'</p>
+                                <form action="../Streaming/index.php" method="post">
+                                    <input type="image" src="'.$url.'" id="pp" value="Submit" name="image">
+                                    <input type="hidden" name="user" value="'.$pseudo.'">
+                                    <p id="pseudo" name="image">'.$pseudo.'</p>
                                 </form>
                             </div>
                             ');
