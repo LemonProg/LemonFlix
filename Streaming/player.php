@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player - Netflix</title>
-    <link rel="stylesheet" href="styles_player.css">
+    <link rel="stylesheet" href="player_style.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -19,7 +19,10 @@
         while ($user = $req->fetch()) {
             $id_profile = $user['id_profile'];
             $id_ep = htmlspecialchars($_POST['id']);
+            $pseudo = htmlspecialchars($_POST['user']);
 
+            $req = $db->prepare("UPDATE profile$id_profile SET watched = ? WHERE pseudo = ?");
+            $req->execute(array($id_ep, $pseudo));
 
             $req = $db->prepare("SELECT * FROM streaming WHERE id = ?");
             $req->execute(array($id_ep));
@@ -29,5 +32,6 @@
                 
     ?>
     <iframe src='<?php echo($url);}} ?>' id='player' scrolling='no' frameborder='0' allowfullscreen></iframe>
+    
 </body>
 </html>
