@@ -33,7 +33,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passw
 
 		if($email_verification['numberEmail'] != 0){
 
-			header('location: inscription.php?error=1&message=Votre adresse email est déjà utilisée par un autre utilisateur.');
+			header('location: inscription.php?error=1&message=Votre adresse email est déjà utilisée.');
 			exit();
 
 		}
@@ -79,9 +79,9 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passw
 		$req->execute();
 	}
 
-	
+	setcookie('secretCode', $secretCode, time()+3600*24, '/', '', false, false);
 
-	header('location: inscription.php?success=1');
+	header('location: index.php');
 	exit();
 
 

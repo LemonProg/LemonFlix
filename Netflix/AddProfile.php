@@ -1,4 +1,18 @@
 <?php
+function randLetter() {
+    $int = rand(0,25);
+    $a_z = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $rand_letter = $a_z[$int];
+    return $rand_letter;
+}
+
+function randNumber() {
+    $int = rand(0, 10);
+    return $int;
+}
+
+$savePro_code = randLetter().randNumber().randLetter().randNumber();
+
     if(!empty($_POST['pseudo']) && (!empty($_POST['url']))) {
         require('../src/connect.php');
 
@@ -12,11 +26,37 @@
 
         while($id_profile = $req->fetch()) {
 
-            $req = $db->prepare("INSERT INTO profile".$id_profile['id_profile']."(pseudo, url) VALUES(?,?)");
-            $req->execute(array($pseudo, $url));
+            $id_profile = $id_profile['id_profile'];
             
-            header('location: AddProfile.php?success=1');
-            exit();
+            $req = $db->prepare("SELECT count(*) as numberPseudo FROM profile$id_profile WHERE pseudo = ?");
+            $req->execute(array($pseudo));
+
+            while($email_verification = $req->fetch()){
+
+                if($email_verification['numberPseudo'] != 0){
+
+                    header('location: AddProfile.php?error=1&message=Ce prénom est déjà utiliser.');
+                    exit();
+
+                }
+            }
+
+            $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url) VALUES(?,?)");
+            $req->execute(array($pseudo, $url));
+
+            $req = $db->prepare("SELECT * FROM profile$id_profile ORDER BY id DESC LIMIT 1");
+	        $req->execute();
+
+            while ($user = $req->fetch()) {
+                $id_user = $user['id'];
+
+                $req = $db->prepare("INSERT INTO saved_profils(id_user, code, pseudo, url) VALUES(?,?,?,?)");
+                $req->execute(array($id_user, $savePro_code, $pseudo, $url));
+                
+                header('location: main.php?success=1');
+                exit();
+            }
+
         }
     }
 ?>
@@ -29,13 +69,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix - AddProfile Page</title>
-    <link rel="stylesheet" href="styleAddProfiles.css">
+    <link rel="stylesheet" href="styleAddProfile.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
     <header>
         <form action="../index.php" id="logo">
-            <input type="image" src="../img/logo.png" alt="Submit">
+            <input type="image" src="../img/LemonFlix.png" alt="Submit">
             <?php
                 require('../src/connect.php');
                 $Code = htmlspecialchars($_COOKIE['secretCode']);
@@ -61,8 +101,6 @@
                     if(isset($_GET['message'])) {
                         echo '<p class="alert">'.htmlspecialchars($_GET['message']).'</p>';
                     }
-                }else if (isset($_GET['success'])) {
-                    echo '<p class="success">Votre Profile a bien été ajouter.</p>';
                 }
 
             ?>
@@ -84,7 +122,9 @@
     </div>
 
     <footer>
-        <p class="footer">&copy; Copyright 2022 – LemonFlix</p>
+        <form action="ImportProfile.php" method="post">
+            <input type="submit" value="Importer un profile" name="import">
+        </form>
     </footer>
 </body>
 </html>

@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix - Profile Page</title>
-    <link rel="stylesheet" href="stylesEdit.css">
+    <link rel="stylesheet" href="styleEdit.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
     <header>
         <form action="../index.php" id="logo">
-            <input type="image" src="../img/logo.png" alt="Submit">
+            <input type="image" src="../img/LemonFlix.png" alt="Submit">
             <div id="logoutDiv">
                 <?php
                     require('../src/connect.php');
@@ -39,9 +39,9 @@
             $req->execute(array($pseudo));
 
             while ($user = $req->fetch()) {
-                echo("<img src=".$user['url']." alt='url' id='pp'>");
+                echo("<img src=".$user['url']." alt='url' id='pp'>");    
             }
-        }    
+        }
         ?>
         <div class="formu">
             <form action="EditProfiles.php" method="post">
@@ -53,10 +53,12 @@
                 </div>
                 
                 <input type="submit" value="Enregister" class="submit" id="save">
-                <input type="submit" value="Annuler" class="submit">
             </form>
         </div>
     </div>
+    <form action="ExportProfile.php" id="exportForm" method='post'>
+        <input type="submit" value="Exporter le profile" id="exportBtn" name="export">
+    </form>
     
 </body>
 </html>
@@ -93,5 +95,4 @@ if(!empty($_POST['pseudo']) && (!empty($_POST['url']))) {
         }
     }
 }
-
 ?>

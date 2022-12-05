@@ -79,7 +79,7 @@ while ($user = $req->fetch()) {
     <div id="parent_streaming">
         <header>
             <form action="../index.php" id="logo">
-                <input type="image" src="../img/logo.png" alt="Submit">
+                <input type="image" src="../img/LemonFlix.png" alt="Submit">
                 <div id="logoutDiv">
                     <?php
                         echo('<img src="'.$url.'" alt="profile_img" id="profile_img">');
@@ -97,54 +97,66 @@ while ($user = $req->fetch()) {
                         <form action="player.php" method="post" class="streaming_form">
                             <div class="watched">
                                 <input type="image" src='.$img.' value="Submit" class="animeCase">
-                                <input type="hidden" name="id" value="<?php echo($watched); }}?>">
+                                <input type="hidden" name="id" value='.$watched.'>
                                 <input type="hidden" name="user" value="NULL">
                             </div>
                         </form>
                     </div>');
-            } }}
+            }}}
         ?>
        
         <h2>Animés -</h2>
         <div class="anime_section">
-            <form action="player.php" method="post" class="streaming_form">
-                <!-- A Couple of Cuckoos -->
-                <div class="coupleCuckoos">
-                    <input type="image" src="main-imgs/coupleCuckoos.jpg" value="Submit" class="animeCase" id="coupleCuckoos">
-                </div>
-            </form>
-            <form action="player.php" method="post" class="streaming_form">
-                <!-- Jujutsu Kaisen 0 -->
-                <div class="jujutsuKaisen">
-                    <input type="image" src="main-imgs/Jujutsu.png" value="Submit" class="animeCase">
-                    <input type="hidden" name="id" value="2">
-                    <input type="hidden" name="user" value="<?php echo($pseudo); ?>">        
-                </div>
-            </form>
-            <form action="player.php" method="post" class="streaming_form">
-                <!-- Sword Art Online -->
-                <div class="sao">
-                    <input type="image" src="main-imgs/SAO.webp" value="Submit" class="animeCase">
-                    <input type="hidden" name="id" value="6">
-                    <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
-                </div>
-            </form>
-            <form action="player.php" method="post" class="streaming_form">
-                <!-- Chainsaw Man -->
-                <div class="chainsawMan">
-                    <input type="image" src="main-imgs/chainsawMan.jpg" value="Submit" class="animeCase">
-                    <input type="hidden" name="id" value="9">
-                    <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
-                </div>
-            </form>
-            <form action="player.php" method="post" class="streaming_form">
-                <!-- Chainsaw Man -->
-                <div class="blueLock">
-                    <input type="image" src="main-imgs/blueLock.jpg" value="Submit" class="animeCase">
-                    <input type="hidden" name="id" value="12">
-                    <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
-                </div>
-            </form>
+            <div class="anime_container">
+                <form action="player.php" method="post" class="streaming_form">
+                    <!-- A Couple of Cuckoos -->
+                    <div class="coupleCuckoos">
+                        <input type="image" src="main-imgs/coupleCuckoos.jpg" value="Submit" class="animeCase" id="coupleCuckoos">
+                    </div>
+                </form>
+                <form action="player.php" method="post" class="streaming_form">
+                    <!-- Jujutsu Kaisen 0 -->
+                    <div class="jujutsuKaisen">
+                        <input type="image" src="main-imgs/Jujutsu.png" value="Submit" class="animeCase">
+                        <input type="hidden" name="id" value="2">
+                        <input type="hidden" name="user" value="<?php echo($pseudo); ?>">        
+                    </div>
+                </form>
+                <form action="player.php" method="post" class="streaming_form">
+                    <!-- Sword Art Online -->
+                    <div class="sao">
+                        <input type="image" src="main-imgs/SAO.webp" value="Submit" class="animeCase">
+                        <input type="hidden" name="id" value="6">
+                        <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
+                    </div>
+                </form>
+                <form action="player.php" method="post" class="streaming_form">
+                    <!-- Chainsaw Man -->
+                    <div class="chainsawMan">
+                        <input type="image" src="main-imgs/chainsawMan.jpg" value="Submit" class="animeCase">
+                        <input type="hidden" name="id" value="9">
+                        <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
+                    </div>
+                </form>
+                <form action="player.php" method="post" class="streaming_form">
+                    <!-- Chainsaw Man -->
+                    <div class="blueLock">
+                        <input type="image" src="main-imgs/blueLock.jpg" value="Submit" class="animeCase" id="secondeOne">
+                        <input type="hidden" name="id" value="12">
+                        <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
+                    </div>
+                </form>
+                <form action="player.php" method="post" class="streaming_form">
+                    <!-- My Hero academia -->
+                    <div class="mha">
+                        <input type="image" src="main-imgs/mha.png" value="Submit" class="animeCase" id="lastOne">
+                        <input type="hidden" name="id" value="13">
+                        <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
+                    </div>
+                </form>
+            </div>
+            <img src="../img/arrow.svg" alt="arrow" class="button" id="d">
+            <img src="../img/arrow.svg" alt="arrow" class="button" id="g">
         </div>
         <h2>Films -</h2>
         <div class="film_section">
@@ -177,5 +189,6 @@ while ($user = $req->fetch()) {
 
     <script src="../Netflix/js/coupleCuckoos.js"></script>
     <script src="../Netflix/js/fadeEffects.js"></script>
+    <script src="../Netflix/js/Anime_carrousel.js"></script>
 </body>
 </html>

@@ -49,7 +49,7 @@ if(isset($_POST['pseudo'])) {
 <body>
     <header>
         <form action="../index.php" id="logo">
-            <input type="image" src="../img/logo.png" alt="Submit">
+            <input type="image" src="../img/LemonFlix.png" alt="Submit">
             <?php
                 require('../src/connect.php');
                 $Code = htmlspecialchars($_COOKIE['secretCode']);

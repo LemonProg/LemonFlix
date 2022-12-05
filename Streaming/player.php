@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player - Netflix</title>
-    <link rel="stylesheet" href="player_style.css">
+    <link rel="stylesheet" href="player_styles.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -29,9 +29,9 @@
 
             while ($user = $req->fetch()) {
                 $url = $user['url'];
-                
-    ?>
-    <iframe src='<?php echo($url);}} ?>' id='player' scrolling='no' frameborder='0' allowfullscreen></iframe>
-    
+                ?>
+                <iframe src='<?php echo($url); }} ?>' id='player' scrolling='no' frameborder='0' allowfullscreen></iframe>
+
+    <script src="../Netflix/js/watch_time.js"></script>
 </body>
 </html>
