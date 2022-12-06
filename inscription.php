@@ -75,7 +75,9 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passw
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			`pseudo` TEXT NOT NULL,
 			`url` TEXT NOT NULL,
-			`watched` TEXT NULL)");
+			`watched` TEXT NULL,
+			`imported` TEXT NULL,
+			`list` TEXT NULL)");
 		$req->execute();
 	}
 

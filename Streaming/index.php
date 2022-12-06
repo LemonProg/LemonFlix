@@ -15,6 +15,7 @@ while ($user = $req->fetch()) {
     while ($user = $req->fetch()) {
         $url = $user['url'];
         $watched = $user['watched'];
+        $list = $user['list'];
 
         $req = $db->prepare("SELECT * FROM streaming WHERE id = ?");
         $req->execute(array($watched));
@@ -32,7 +33,7 @@ while ($user = $req->fetch()) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix - Streaming Page</title>
-    <link rel="stylesheet" href="streaming_styles.css">
+    <link rel="stylesheet" href="streaming_style.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -110,7 +111,7 @@ while ($user = $req->fetch()) {
                             </div>
                         </form>
                     </div>');
-            }}}
+            }
         ?>
        
         <h2>Animés -</h2>
@@ -193,14 +194,33 @@ while ($user = $req->fetch()) {
                 </div>
             </form>
         </div>
-        <h2>Ma Liste -</h2>
-        <div class="menu">
-            <div class="maListe">
-                <input type="image" src="main-imgs/Minions.jfif" value="Submit" class="animeCase">
-                <input type="hidden" name="id" value="8">
-                <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
-            </div>
-        </div>
+        
+        <?php
+                $req = $db->prepare("SELECT * FROM streaming WHERE id = ?");
+                $req->execute(array($list));
+
+                while ($user = $req->fetch()) {
+                    $main_img = $user['img'];
+                }
+
+                if ($list != "") {
+                    echo('
+                    <h2>Ma Liste -</h2>
+                    <div class="menu">
+                        <form action="player.php" method="post" class="streaming_form">
+                            <div class="maListe">
+                                <input type="image" src="'.$main_img.'" value="Submit" class="animeCase">
+                                <input type="hidden" name="id" value="'.$list.'">
+                                <input type="hidden" name="user" value"'.$pseudo.'">
+                            </div>
+                        </form>
+                    </div>
+                    ');
+                }
+
+            }}
+            ?>
+        
     </div>
 
     <script src="../Netflix/js/coupleCuckoos.js"></script>
