@@ -63,6 +63,6 @@
         <p class="footer">&copy; Copyright 2022 – LemonFlix</p>
     </footer>
 
-    <script src="js/mainFadeStart.js"></script>
+    <script src="js/mainFadeClick.js"></script>
 </body>
 </html>

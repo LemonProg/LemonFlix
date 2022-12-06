@@ -1,6 +1,13 @@
 <?php
+error_reporting(0);
 require('../src/connect.php');
+
 $pseudo = htmlspecialchars($_POST['user']);
+
+if ($pseudo != '') {
+    setcookie('pseudoUser', $pseudo, time()+3600*24, '/', '', false, false);
+}
+
 $Code = htmlspecialchars($_COOKIE['secretCode']);
 
 $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
@@ -8,6 +15,15 @@ $req->execute(array($Code));
 
 while ($user = $req->fetch()) {
     $id_profile = $user['id_profile'];
+
+    if (!empty($_POST['addList'])) {
+        $pseudo = htmlspecialchars($_COOKIE['pseudoUser']);
+    
+        $list_id = htmlspecialchars($_POST['addList']);
+    
+        $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
+        $req->execute(array($list_id, $pseudo));
+    }
 
     $req = $db->prepare("SELECT * FROM profile$id_profile WHERE pseudo = ?");
     $req->execute(array($pseudo));
@@ -110,10 +126,13 @@ while ($user = $req->fetch()) {
                                 <input type="hidden" name="user" value="NULL">
                             </div>
                         </form>
+                        <form action="index.php" method="post" class="addToList">
+                            <input type="submit" value="Ajout" id="addList">
+                            <input type="hidden" name="addList" value="'.$watched.'">
+                        </form>
                     </div>');
             }
         ?>
-       
         <h2>Animés -</h2>
         <div class="anime_section">
             <div class="anime_container">
