@@ -64,7 +64,7 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Netflix</title>
+	<title>Connection - LemonFlix</title>
 	<link rel="stylesheet" type="text/css" href="design/style.css">
 	<link rel="icon" type="image/pngn" href="img/favicon.png">
 </head>
