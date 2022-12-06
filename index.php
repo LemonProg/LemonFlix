@@ -30,7 +30,6 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 
 	$req = $db->prepare("SELECT * FROM user WHERE email = ?");
 	$req->execute(array($email));
-
 	while($user = $req->fetch()){
 
 		if($password == $user['password']){
