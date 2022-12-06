@@ -1,0 +1,161 @@
+html {
+    background-color: #141414;
+    font-family: arial;
+}
+
+body {
+    overflow: hidden;
+  }
+
+#logo input {
+	padding: 20px 0 0 70px;
+    transition: 0.3s;
+}
+
+#logo input:hover {
+    transform: scale(0.9);
+}
+
+#logo input {
+	height: 30px;
+    size: 7px;
+}
+
+h1 {
+    color: white;
+    font-size: 50px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+form[id="logo"] p {
+    color: white;
+    text-align: right;
+    margin-top: 0px;
+    margin-right: 40px;
+}
+
+form[id="Forumlaire"] {
+    color: white;
+    font-size: 20px;
+}
+
+form[id="Forumlaire"] a {
+    color: white;
+    font-size: 30px;
+}
+
+.container {
+    text-align: center;
+}
+
+.prenom {
+    margin-top: 50px;
+}
+
+.alert {
+    background-color: red;
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 7px;
+    border-radius: 5px;
+
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+#logout {
+    font-size: 20px;
+} 
+
+#logoutDiv {
+    text-align: right;
+    margin-right: 40px;
+}
+
+.success {
+    background-color: green;
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 7px;
+    border-radius: 5px;
+
+}
+
+.form {
+    font-size: 30px;
+    background-color: #666666;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#valBtn {
+    margin-top: 45px;
+    font-size: 25px;
+    background-color: white;
+    color: black;
+    padding: 10px 30px 10px 30px;
+    transition: 0.25s;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#valBtn:hover {
+    background-color: #e50914;
+    color: white;
+    transform: scale(0.9);
+} 
+
+
+footer {
+    position:absolute;
+    bottom:50px;
+    width: 100%;
+    text-align: center;
+    transition: 0.5s;
+}
+
+footer input {
+    padding: 15px 50px 15px 50px;
+    transition: 0.3s;
+    font-size: 15px;
+    border-radius: 7px;
+}
+
+.footer {
+    font-size: 20px;
+    cursor: default;
+    transition: 0.4s;
+    color: white;
+}
+
+footer input:hover {
+    background-color: #e50914;
+    transition: 0.3s;
+    color: white;
+}
+
+#website {
+    font-size: 20px;
+    color: #666666;
+}
+
+#website:hover {
+    color: white;
+}
+
+#websiteDiv {
+    margin-top: 15px;
+}
