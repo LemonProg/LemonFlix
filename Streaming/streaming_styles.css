@@ -95,6 +95,13 @@ h2 {
     margin-left: var(--main-margin-left);
 }
 
+.menu_reprendre {
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--main-margin-left);
+    gap: 14px;
+}
+
 .animeCase{
     width: 320px;
     height: 180px;
@@ -109,7 +116,21 @@ h2 {
     margin-right: 40px;
     margin-left: 40px;
     transition-delay: 0.1s; 
-} 
+}
+
+#addList_input {
+    background-color: white;
+    padding: 20px;
+    transition: 0.2s;
+    font-weight: bold;
+    transition: 0.2s;
+    border: none;
+}
+
+#addList_input:hover{
+    transform: scale(0.95);
+    transition: 0.2s;
+}
 
 .streaming_form {
     display: flex;

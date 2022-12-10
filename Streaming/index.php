@@ -49,7 +49,7 @@ while ($user = $req->fetch()) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceuil - LemonFlix</title>
-    <link rel="stylesheet" href="streaming_style.css">
+    <link rel="stylesheet" href="streaming_styles.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -118,7 +118,7 @@ while ($user = $req->fetch()) {
             if (isset($watched)) {
                 echo('
                     <h2 class="h2_margin">Reprendre avec le profile de <strong>'.$pseudo.'</strong> -</h2>
-                    <div class="menu">
+                    <div class="menu_reprendre">
                         <form action="player.php" method="post" class="streaming_form">
                             <div class="watched">
                                 <input type="image" src='.$img.' value="Submit" class="animeCase">
@@ -126,8 +126,8 @@ while ($user = $req->fetch()) {
                                 <input type="hidden" name="user" value="NULL">
                             </div>
                         </form>
-                        <form action="index.php" method="post" class="addToList">
-                            <input type="submit" value="Ajout" id="addList">
+                        <form action="index.php" method="post" class="addToList_form">
+                            <input type="submit" value="Ajouter à Ma Liste" id="addList_input">
                             <input type="hidden" name="addList" value="'.$watched.'">
                         </form>
                     </div>');
