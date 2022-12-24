@@ -36,20 +36,27 @@
 
             echo('<a id="createProfile" href="AddProfile.php">Créer un profile</a> <br>');
 
+            $isEmpty = True;
+
             while ($profile = $req->fetch()) {
                 $id = $profile['id'];
 
                 if ($id != "") {
-                    echo('
-                        <div class="DeleteDiv">
-                            <a id="deleteProfile" href="DelProfile.php">Supprimer un profile</a> 
-                        </div>
-                        <br>
-                        <div class="ModifyDiv">
-                            <a id="modifyProfile" href="ModProfile.php">Modifier un profile</a> 
-                        </div>
-                    ');
+                    $isEmpty = False;
                 }
+            }
+            if ($isEmpty == False) {
+                echo('
+                    <div class="DeleteDiv">
+                        <a id="deleteProfile" href="DelProfile.php">Supprimer un profile</a> 
+                    </div>
+                    <br>
+                    <div class="ModifyDiv">
+                        <a id="modifyProfile" href="ModProfile.php">Modifier un profile</a> 
+                    </div>
+                ');
+            } else {
+                echo("");
             }
         }
         ?>
