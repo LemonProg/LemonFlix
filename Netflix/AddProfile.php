@@ -27,38 +27,52 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
         while($id_profile = $req->fetch()) {
 
             $id_profile = $id_profile['id_profile'];
+
+            $req = $db->prepare("SELECT count(*) from profile$id_profile");
+            $req->execute();
             
-            $req = $db->prepare("SELECT count(*) as numberPseudo FROM profile$id_profile WHERE pseudo = ?");
-            $req->execute(array($pseudo));
+            while ($user = $req->fetch()) {
+                $count = $user[0];
 
-            while($email_verification = $req->fetch()){
-
-                if($email_verification['numberPseudo'] != 0){
-
-                    header('location: AddProfile.php?error=1&message=Ce prénom est déjà utiliser.');
+                if ($count < 5) {
+                    $req = $db->prepare("SELECT count(*) as numberPseudo FROM profile$id_profile WHERE pseudo = ?");
+                    $req->execute(array($pseudo));
+        
+                    while($email_verification = $req->fetch()){
+        
+                        if($email_verification['numberPseudo'] != 0){
+        
+                            header('location: AddProfile.php?error=1&message=Ce prénom est déjà utiliser.');
+                            exit();
+        
+                        }
+                    }
+        
+                    $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url) VALUES(?,?)");
+                    $req->execute(array($pseudo, $url));
+        
+                    $req = $db->prepare("SELECT * FROM profile$id_profile ORDER BY id DESC LIMIT 1");
+                    $req->execute();
+        
+                    while ($user = $req->fetch()) {
+                        $id_user = $user['id'];
+        
+                        $req = $db->prepare("INSERT INTO saved_profils(id_user, code, pseudo, url) VALUES(?,?,?,?)");
+                        $req->execute(array($id_user, $savePro_code, $pseudo, $url));
+                        
+                        header('location: main.php?success=1');
+                        exit();
+                    }
+                } else {
+                    header('location: AddProfile.php?error=1&message=Vous avez atteint le nombre maxial de profils.');
                     exit();
-
                 }
             }
-
-            $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url) VALUES(?,?)");
-            $req->execute(array($pseudo, $url));
-
-            $req = $db->prepare("SELECT * FROM profile$id_profile ORDER BY id DESC LIMIT 1");
-	        $req->execute();
-
-            while ($user = $req->fetch()) {
-                $id_user = $user['id'];
-
-                $req = $db->prepare("INSERT INTO saved_profils(id_user, code, pseudo, url) VALUES(?,?,?,?)");
-                $req->execute(array($id_user, $savePro_code, $pseudo, $url));
-                
-                header('location: main.php?success=1');
-                exit();
-            }
+            
 
         }
     }
+
 ?>
 
 
@@ -79,6 +93,7 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
             <?php
                 require('../src/connect.php');
                 $Code = htmlspecialchars($_COOKIE['secretCode']);
+            
                 
                 $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
                 $req->execute(array($Code));
