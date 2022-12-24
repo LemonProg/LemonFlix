@@ -126,10 +126,6 @@ while ($user = $req->fetch()) {
                                 <input type="hidden" name="user" value="NULL">
                             </div>
                         </form>
-                        <form action="index.php" method="post" class="addToList_form">
-                            <input type="submit" value="Ajouter à Ma Liste" id="addList_input">
-                            <input type="hidden" name="addList" value="'.$watched.'">
-                        </form>
                     </div>');
             }
         ?>
