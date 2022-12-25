@@ -1,0 +1,150 @@
+html {
+    background-color: #141414;
+    font-family: arial;
+}
+
+body {
+    overflow: hidden;
+  }
+
+.header{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 200px;
+}
+
+header {
+    margin-top: 20px;
+}
+
+#email {
+    right: 45px;
+    top: 47px;
+    position: absolute;
+}
+
+#logo input {
+	padding: 20px 0 0 70px;
+    transition: 0.3s;
+}
+
+#logo input:hover {
+    transform: scale(0.9);
+}
+
+#logo input {
+	height: 30px;
+    size: 7px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#logout {
+    font-size: 20px;
+} 
+
+#logout:hover {
+    color: rgb(253, 86, 86);
+} 
+
+#logoutDiv {
+    text-align: right;
+    margin-right: 40px;
+}
+
+footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    text-align: center;
+    margin: 0;
+    
+}
+
+.footer {
+    font-size: 20px;
+    cursor: default;
+    transition: 0.4s;
+    color: white;
+    
+}
+
+.footer:hover {
+    color: rgb(253, 86, 86);
+}
+
+.containerParent {
+    text-align: center;
+}
+
+#pp {
+    width: 200px;
+    opacity: 50%;
+}
+
+#pp:hover {
+    border: white 4px solid;
+    box-sizing: border-box;
+}
+
+#backBtn {
+    margin-top: 100px;
+    padding: 10px 30px 10px 30px;
+    font-weight: bold;
+    font-size: 25px;
+    background-color: white;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+#backBtn:hover {
+    transition: 0.2s;
+    background-color: #e50914;
+    color: white;
+}
+
+#pseudo {
+    margin: 25px 100px 0px 100px;
+    font-size: 20px;
+    color: rgb(90, 90, 90);
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+#pseudo:hover {
+    color: white;
+    cursor: default;
+    
+}
+
+#email {
+    color: white;
+    margin-top: 0px;
+}
+
+.top {
+    position: absolute;
+    left: 115px;
+    top: 80px;
+    width: 40px;
+    z-index: 1;
+    user-select: none;
+    pointer-events: none;
+}
+
+.container {
+    margin-top: 200px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+

@@ -43,7 +43,7 @@ if(isset($_POST['pseudo'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supprimer profile - LemonFlix</title>
-    <link rel="stylesheet" href="styleDelProfiles.css">
+    <link rel="stylesheet" href="styleDelProfils.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -59,7 +59,7 @@ if(isset($_POST['pseudo'])) {
 
                 while ($user = $req->fetch()) {
                     echo('<p id="email">'.$user["email"].'</p>');
-                }
+
                 ?> 
             <div id="logoutDiv">
                 <a id="logout" href="../logout.php">Déconnexion</a>
@@ -69,12 +69,6 @@ if(isset($_POST['pseudo'])) {
     <div class="container">
         <h1>Suppression d'un  utilisateur</h1>
         <?php
-            $Code = htmlspecialchars($_COOKIE['secretCode']);
-            
-            $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
-            $req->execute(array($Code));
-            
-            while ($user = $req->fetch()) {
                 $req = $db->prepare("SELECT * FROM profile".$user['id_profile']);
                 $req->execute();
             

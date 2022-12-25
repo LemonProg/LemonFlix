@@ -5,14 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gérer profiles - LemonFlix</title>
-    <link rel="stylesheet" href="styleProfile.css">
+    <link rel="stylesheet" href="stylesProfile.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
     <header>
         <form action="../index.php" id="logo">
             <input type="image" src="../img/LemonFlix.png" alt="Submit">
-            <div id="logoutDiv">
             <?php
                 require('../src/connect.php');
                 $Code = htmlspecialchars($_COOKIE['secretCode']);
@@ -23,8 +22,8 @@
                 while ($user = $req->fetch()) {
                     echo('<p id="email">'.$user["email"].'</p>');
                     $id_profile = $user['id_profile'];
-
-                ?>  
+                ?> 
+            <div id="logoutDiv">
                 <a id="logout" href="../logout.php">Déconnexion</a>
             </div>
         </form>

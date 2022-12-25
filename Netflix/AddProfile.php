@@ -83,7 +83,7 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajout Profile - LemonFlix</title>
-    <link rel="stylesheet" href="styleAddProfile.css">
+    <link rel="stylesheet" href="stylesAddProfile.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -93,7 +93,6 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
             <?php
                 require('../src/connect.php');
                 $Code = htmlspecialchars($_COOKIE['secretCode']);
-            
                 
                 $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
                 $req->execute(array($Code));
@@ -109,7 +108,7 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
     </header>
     <div class="container">
         <form method="post" action="AddProfile.php" id="Forumlaire">
-            <h1>Ajout d'un  utilisateur</h1>
+            <h1>Ajouter un profil</h1>
             <?php
 
                 if(isset($_GET['error'])) {

@@ -1,0 +1,113 @@
+html {
+    background-color: #141414;
+    font-family: arial;
+}
+
+body {
+    overflow: hidden;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 200px;
+}
+
+header {
+    margin-top: 20px;
+}
+
+#email {
+    right: 45px;
+    top: 47px;
+    position: absolute;
+}
+
+#logo input {
+	padding: 20px 0 0 70px;
+    transition: 0.3s;
+}
+
+#logo input:hover {
+    transform: scale(0.9);
+}
+
+#logo input {
+	height: 30px;
+    size: 7px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#logout {
+    font-size: 20px;
+} 
+
+#logout:hover {
+    color: rgb(253, 86, 86);
+} 
+
+#logoutDiv {
+    text-align: right;
+    margin-right: 40px;
+}
+
+footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    text-align: center;
+    margin: 0;
+    
+}
+
+.footer {
+    font-size: 20px;
+    cursor: default;
+    transition: 0.4s;
+    color: white;
+    
+}
+
+.footer:hover {
+    color: rgb(253, 86, 86);
+}
+
+#createProfile{
+    font-size: 50px;
+}
+
+#deleteProfile {
+    font-size: 50px;
+}
+
+.DeleteDiv {
+    margin-top: 70px;
+}
+
+.ModifyDiv {
+    margin-top: 70px;
+}
+
+#modifyProfile {
+    font-size: 50px;
+}
+
+.container {
+    margin-top: 200px;
+    text-align: center;
+}
+
+#email {
+    color: white;
+    margin-top: 0px;
+}
+
+
