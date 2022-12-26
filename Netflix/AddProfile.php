@@ -1,4 +1,15 @@
 <?php
+require('../src/connect.php');
+
+$Code = htmlspecialchars($_COOKIE['secretCode']);
+
+$req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
+$req->execute(array($Code));
+
+while ($user = $req->fetch()) {
+    $id_profile = $user['id_profile'];
+}
+
 function randLetter() {
     $int = rand(0,25);
     $a_z = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -19,7 +30,6 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
         $pseudo      = htmlspecialchars($_POST['pseudo']);
         $url         = htmlspecialchars($_POST['url']);
         $secret_code = htmlspecialchars($_COOKIE['secretCode']);
-
 
         $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
 	    $req->execute(array($secret_code));
@@ -42,7 +52,7 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
         
                         if($email_verification['numberPseudo'] != 0){
         
-                            header('location: AddProfile.php?error=1&message=Ce prénom est déjà utiliser.');
+                            header('location: AddProfile.php?error=1');
                             exit();
         
                         }
@@ -73,6 +83,46 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
         }
     }
 
+    if (!empty($_POST['code'])) {
+        $codeImport = htmlspecialchars($_POST['code']);
+        
+        $req = $db->prepare("SELECT * FROM saved_profils WHERE code = ?");
+            $req->execute(array($codeImport));
+
+            while ($user = $req->fetch()) {
+                $imported_pseudo = htmlspecialchars($user['pseudo']);
+                $imported_url = htmlspecialchars($user['url']);
+                $imported_watched = htmlspecialchars($user['watched']);
+            
+                $req = $db->prepare("SELECT count(*) as numberPseudo FROM profile$id_profile WHERE pseudo = ?");
+                $req->execute(array($imported_pseudo));
+
+                while($email_verification = $req->fetch()){
+
+                    if($email_verification['numberPseudo'] != 0){
+
+                        header('location: AddProfile.php?errorCode=1');
+                        exit();
+
+                    }
+                }
+
+                if (!empty($imported_watched)) {
+                    $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url, watched, imported) VALUES(?,?,?,?)");
+                    $req->execute(array($imported_pseudo, $imported_url, $imported_watched, "true"));
+
+                    header('location: main.php');
+                    exit();
+                } else{
+                    $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url, imported) VALUES(?,?,?)");
+                    $req->execute(array($imported_pseudo, $imported_url, "true"));
+
+                    header('location: main.php');
+                    exit();
+                }
+                
+            }
+    }
 ?>
 
 
@@ -106,37 +156,49 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
             </div>
         </form>
     </header>
-    <div class="container">
-        <form method="post" action="AddProfile.php" id="Forumlaire">
-            <h1>Ajouter un profil</h1>
-            <?php
-
-                if(isset($_GET['error'])) {
-                    if(isset($_GET['message'])) {
-                        echo '<p class="alert">'.htmlspecialchars($_GET['message']).'</p>';
-                    }
-                }
-
-            ?>
-            <td>
-                <p class="prenom">Prénom</p>
-                <input type="text" name="pseudo" class="form" required>
-            </td>
-            <td>
-                <p>Photo de Profile</p>
-                <input type="url" name="url" class="form" required>
+    <h1>Ajouter un profil</h1>
+    <div class="parent">
+        <div class="container">
+            <form method="post" action="AddProfile.php" id="Forumlaire">
+                <td>
+                    <input type="text" name="pseudo" class="form" id="nameInput" placeholder="Prénom">
+                </td>
                 <br>
-                <div id="websiteDiv">
-                    <a href="https://online-hoster.000webhostapp.com/" id="website">Site d'hébergement en ligne</a>
-                </div>
-                
-            </td>
-            <input type="submit" value="Ajouter" id="valBtn">
-        </form>
+                <td>
+                    <input type="url" name="url" class="form" placeholder="Photo de profil">
+                    <br>
+                    <div id="websiteDiv">
+                        <a href="https://online-hoster.000webhostapp.com/" id="website">Site d'hébergement personnalisé</a>
+                    </div>
+                    
+                </td>
+        </div>
+        <div class="vertical"></div>
+        <div class="containerImport">
+            <h2>Importer un profil</h2>
+            <input type="text" name="code" class="form" placeholder="Code" id="code">
+            <p id="nameText"></p>
+        </div>
     </div>
+    <div class="bottomBtn">
+        <input type="submit" value="Continuer" id="valBtn">
+    </form>
+    <form action="profiles.php">
+        <input type="submit" value="Annuler" id="cancelBtn">
+    </form>
+    </div>
+    <?php
+    
+        if(isset($_GET['error'])) {
+            echo("<script src='js/addProfilsNameError.js'></script>");
+        }
+        if(isset($_GET['errorCode'])) {
+            echo("<script src='js/addProfilsCodeError.js'></script>");
+        }
 
+    ?>
     <footer>
-        <p class="footer">&copy; Copyright 2022 – LemonFlix</p>
+        <p class="footer">&copy; Copyright 2022 - LemonFlix</p>
     </footer>
 </body>
 </html>
