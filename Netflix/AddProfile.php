@@ -83,7 +83,7 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajout Profile - LemonFlix</title>
-    <link rel="stylesheet" href="stylesAddProfile.css">
+    <link rel="stylesheet" href="stylesAddProfils.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -136,9 +136,7 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
     </div>
 
     <footer>
-        <form action="ImportProfile.php" method="post">
-            <input type="submit" value="Importer un profile" name="import">
-        </form>
+        <p class="footer">&copy; Copyright 2022 – LemonFlix</p>
     </footer>
 </body>
 </html>
