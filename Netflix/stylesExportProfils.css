@@ -79,3 +79,17 @@ h2 {
     color: white;
     text-align: center;
 }
+
+span {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 35px;
+    filter: blur(7px);
+    transition: 0.1s;
+}
+
+span:hover {
+    filter: blur(0px);
+    transition: 0.1s;
+}
