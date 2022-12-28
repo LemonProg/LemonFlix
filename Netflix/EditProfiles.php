@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier profile - LemonFlix</title>
-    <link rel="stylesheet" href="stylesEdit.css">
+    <link rel="stylesheet" href="styleEdit.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -56,9 +56,14 @@
             </form>
         </div>
     </div>
-    <form action="ExportProfile.php" id="exportForm" method='post'>
-        <input type="submit" value="Exporter le profile" id="exportBtn" name="export">
-    </form>
+    <div class="bottomBtn">
+        <form action="ExportProfile.php" id="exportForm" method='post'>
+            <input type="submit" value="Exporter le profile" id="exportBtn" name="export">
+        </form>
+        <form action="EditProfiles.php" id="deleteForm" method='post'>
+            <input type="submit" value="Supprimer le profile" id="deleteBtn" name="delete">
+        </form>
+    </div>
     
 </body>
 </html>
@@ -94,5 +99,10 @@ if(!empty($_POST['pseudo']) && (!empty($_POST['url']))) {
             exit();
         }
     }
+}
+
+if (!empty($_POST['delete'])) {
+    header("location: DelProfile.php");
+    exit();
 }
 ?>

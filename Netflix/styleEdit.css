@@ -124,14 +124,15 @@ h2 {
     color: white;
 }
 
-#exportForm {
+.bottomBtn {
     display: flex;
     justify-content: center;
     margin-top: 350px;
+    gap: 30px;
 }
 
 #exportBtn {
-    padding: 20px 119px 20px 119px;
+    padding: 20px 100px 20px 100px;
     font-weight: bold;
     font-size: 20px;
     background-color: white;
@@ -140,7 +141,21 @@ h2 {
 }
 
 #exportBtn:hover {
+    transform: scale(0.95);
+    transition: 0.1s;
+}
+
+#deleteBtn {
+    padding: 20px 100px 20px 100px;
+    font-weight: bold;
+    font-size: 20px;
     background-color: #e50914;
     color: white;
+    transition: 0.1s;
+    border-radius: 10px;
+}
+
+#deleteBtn:hover {
+    transform: scale(0.95);
     transition: 0.1s;
 }
