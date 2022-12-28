@@ -80,10 +80,14 @@ h2 {
     text-align: center;
 }
 
-span {
-    color: white;
+.codeDiv {
     display: flex;
     justify-content: center;
+}
+
+span {
+    color: white;
+    width: auto;
     font-size: 35px;
     filter: blur(7px);
     transition: 0.1s;
@@ -92,4 +96,5 @@ span {
 span:hover {
     filter: blur(0px);
     transition: 0.1s;
+    cursor: default;
 }

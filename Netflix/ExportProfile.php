@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exporter profile - LemonFlix</title>
-    <link rel="stylesheet" href="stylesExportProfils.css">
+    <link rel="stylesheet" href="stylesExportProfil.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -58,7 +58,7 @@ while ($saved_user = $req->fetch()) {
         $req->execute(array($pseudo, $url, $watched, $id_user));
 
         echo("<h2>Votre Code publique :</h2>");
-        echo("<span>$savePro_code</span>");
+        echo("<div class='codeDiv'><span>$savePro_code</span></div>");
     }
     }}}}
 
