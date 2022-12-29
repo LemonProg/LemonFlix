@@ -1,3 +1,9 @@
+<?php
+if (!empty($_COOKIE['user'])) {
+    $pseudoCookie = htmlspecialchars($_COOKIE['user']);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +11,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier profile - LemonFlix</title>
-    <link rel="stylesheet" href="styleEdit.css">
+    <link rel="stylesheet" href="styleEdits.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
+    <dialog id="confirmDel">
+        <b>Êtes-vous sûr de vouloir supprimer le profil&nbsp<i><?php echo($pseudoCookie); ?></i>&nbsp?</b>
+        <div class="confirmDiv">
+            <form action="EditProfiles.php" method="post">
+                <input type="hidden" name="yes" value="yes">
+                <input type="submit" value="Oui" id="yes" class="confirm">
+            </form>
+            <form action="ModProfile.php">
+                <input type="submit" value="Non" id="no" class="confirm">
+            </form>
+        </div>
+    </dialog>
     <header>
         <form action="../index.php" id="logo">
             <input type="image" src="../img/LemonFlix.png" alt="Submit">
@@ -21,7 +39,7 @@
 
                     $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
                     $req->execute(array($Code));
-
+                    
                     while ($user = $req->fetch()) {
                         echo('<p id="email">'.$user["email"].'</p>');          
                         $id_profile = $user['id_profile'];              
@@ -30,7 +48,6 @@
             </div>
         </form>
     </header>
-
     <h1>Modifier le profile</h1>
     <div class="profile">
         <?php 
@@ -102,7 +119,9 @@ if(!empty($_POST['pseudo']) && (!empty($_POST['url']))) {
 }
 
 if (!empty($_POST['delete'])) {
-    header("location: DelProfile.php");
-    exit();
+    echo("<script src='js/confirmDelete.js'></script>");
+}
+if (!empty($_POST['yes'])) {
+    echo('<h1>DELETING...</h1>');
 }
 ?>
