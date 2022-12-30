@@ -183,7 +183,7 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
     <div class="bottomBtn">
         <input type="submit" value="Continuer" id="valBtn">
     </form>
-    <form action="profiles.php">
+    <form action="ModProfile.php">
         <input type="submit" value="Annuler" id="cancelBtn">
     </form>
     </div>

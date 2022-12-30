@@ -16,8 +16,6 @@ if(!empty($_POST['username'])) {
     $username      = htmlspecialchars($_POST['username']);
     $secret_code = htmlspecialchars($_COOKIE['secretCode']);
 
-    echo("<h1>$username</h1>");
-
     $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
     $req->execute(array($secret_code));
 
