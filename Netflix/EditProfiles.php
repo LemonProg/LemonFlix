@@ -18,8 +18,8 @@ if (!empty($_COOKIE['user'])) {
     <dialog id="confirmDel">
         <b>Êtes-vous sûr de vouloir supprimer le profil&nbsp<i><?php echo($pseudoCookie); ?></i>&nbsp?</b>
         <div class="confirmDiv">
-            <form action="EditProfiles.php" method="post">
-                <input type="hidden" name="yes" value="yes">
+            <form action="DelProfile.php" method="post">
+                <input type="hidden" name="username" value="<?php echo($pseudoCookie); ?>">
                 <input type="submit" value="Oui" id="yes" class="confirm">
             </form>
             <form action="ModProfile.php">
@@ -111,8 +111,8 @@ if(!empty($_POST['pseudo']) && (!empty($_POST['url']))) {
             $req = $db->prepare("UPDATE profile$id_profile SET pseudo = ?, url = ? WHERE id = ?");
             $req->execute(array($pseudo_form, $url, $id));
             
-            header('location: ModProfile.php');
             setcookie('user', '', time()-3600, '/', '', false, false);
+            header('location: ModProfile.php');
             exit();
         }
     }
@@ -120,8 +120,7 @@ if(!empty($_POST['pseudo']) && (!empty($_POST['url']))) {
 
 if (!empty($_POST['delete'])) {
     echo("<script src='js/confirmDelete.js'></script>");
-}
-if (!empty($_POST['yes'])) {
-    echo('<h1>DELETING...</h1>');
+
+    setcookie('user', $pseudoCookie, time()+3600*24, '/', '', false, false);
 }
 ?>
