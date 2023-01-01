@@ -9,7 +9,7 @@ function fade(form) {
 
 let i = 0;
 
-while (i <= 30) {
+while (i <= 35) {
     fade(form[i]);
     i++;
 }

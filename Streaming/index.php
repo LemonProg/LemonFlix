@@ -48,8 +48,8 @@ while ($user = $req->fetch()) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceuil - LemonFlix</title>
-    <link rel="stylesheet" href="streaming_styles.css">
+    <title>Accueil - LemonFlix</title>
+    <link rel="stylesheet" href="streaming_style.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -135,9 +135,22 @@ while ($user = $req->fetch()) {
                 <form action="player.php" method="post" class="streaming_form">
                     <!-- A Couple of Cuckoos -->
                     <div class="coupleCuckoos">
-                        <input type="image" src="main-imgs/coupleCuckoos.jpg" value="Submit" class="animeCase" id="coupleCuckoos">
+                        <div class="dropdown">
+                            <input type="image" src="main-imgs/coupleCuckoos.jpg" value="Submit" class="animeCase" id="coupleCuckoos">
+                            </form>
+                            <div class="dropdown-content">
+                                <form action="index.php" method="post">
+                                    <input type="hidden" name="addList" value="1">
+                                    <input type="submit" value="Ajouter à ma liste" id="list">
+                                </form>
+                                <form action="player.php" method="post">
+                                    <input type="submit" value="Regarder" id="play">
+                                    <input type="hidden" name="id" value="1">
+                                    <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </form>
                 <form action="player.php" method="post" class="streaming_form">
                     <!-- Jujutsu Kaisen 0 -->
                     <div class="jujutsuKaisen">
@@ -238,7 +251,7 @@ while ($user = $req->fetch()) {
         
     </div>
 
-    <script src="../Netflix/js/coupleCuckoos.js"></script>
+    <script src="../Netflix/js/coupleCuckoosScript.js"></script>
     <script src="../Netflix/js/fadeEffects.js"></script>
     <script src="../Netflix/js/Anime_carrousel.js"></script>
 </body>

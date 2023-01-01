@@ -106,16 +106,18 @@ h2 {
     width: 320px;
     height: 180px;
     transition: 0.2s;
-    transition-delay: 0.1s;
 }
 
-.animeCase:hover {
+.coupleCuckoos:hover {
     transition: 0.2s;
-    transform: scale(1.2);
-    margin-top: 20px;
-    margin-right: 40px;
-    margin-left: 40px;
-    transition-delay: 0.1s; 
+    transform: scale(1.30);
+    margin-right: 45px;
+    margin-left: 45px;
+    margin-top: -45px;
+}
+
+.coupleCuckoos {
+    transition: 0.2s;
 }
 
 #addList_input {
@@ -246,6 +248,39 @@ h1 {
     transform: rotate(0deg);
     transition: 0.3s ease;
 }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    z-index: 1;
+    margin-top: -4px;
+}
+
+#play {
+    background-color: #e50914;
+    color: white;
+}
+
+.dropdown-content input{
+    min-width: 160px;
+    color: black;
+    padding: 16px 16px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+}
+
+#list:hover {background-color: #ddd;}
+#play:hover {background-color: #9C0F16;}
+.dropdown:hover .dropdown-content {display: flex;}
 
 /* #saisonChoose {
     padding: 10px;
