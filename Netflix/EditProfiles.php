@@ -11,7 +11,7 @@ if (!empty($_COOKIE['user'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier profile - LemonFlix</title>
-    <link rel="stylesheet" href="styleEdits.css">
+    <link rel="stylesheet" href="styleEdit.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -50,27 +50,29 @@ if (!empty($_COOKIE['user'])) {
     </header>
     <h1>Modifier le profile</h1>
     <div class="profile">
-        <?php 
-        
-            $req = $db->prepare("SELECT * FROM profile$id_profile WHERE pseudo = ?");
-            $req->execute(array($pseudo));
-
-            while ($user = $req->fetch()) {
-                echo("<img src=".$user['url']." alt='url' id='pp'>");    
+        <div class="border">
+            <?php 
+            
+                $req = $db->prepare("SELECT * FROM profile$id_profile WHERE pseudo = ?");
+                $req->execute(array($pseudo));
+    
+                while ($user = $req->fetch()) {
+                    echo("<img src=".$user['url']." alt='url' id='pp'>");    
+                }
             }
-        }
-        ?>
-        <div class="formu">
-            <form action="EditProfiles.php" method="post">
-                <input type="text" name="pseudo" class="input" placeholder="<?php echo($pseudo); ?>" required>
-                <br>
-                <input type="text" name="url" class="input" placeholder="Photo de profile" required>
-                <div class="webhost">
-                    <a href="https://online-hoster.000webhostapp.com/" class="website">(Site d'hébergement en ligne)</a>   
-                </div>
-                
-                <input type="submit" value="Enregister" class="submit" id="save">
-            </form>
+            ?>
+            <div class="formu">
+                <form action="EditProfiles.php" method="post">
+                    <input type="text" name="pseudo" class="input" placeholder="<?php echo($pseudo); ?>" required>
+                    <br>
+                    <input type="text" name="url" class="input" placeholder="Photo de profile" required>
+                    <div class="webhost">
+                        <a href="https://online-hoster.000webhostapp.com/" class="website">(Site d'hébergement en ligne)</a>   
+                    </div>
+                    
+                    <input type="submit" value="Enregister" class="submit" id="save">
+                </form>
+            </div>
         </div>
     </div>
     <div class="bottomBtn">
