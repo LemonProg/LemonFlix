@@ -105,19 +105,22 @@ h2 {
 .animeCase{
     width: 320px;
     height: 180px;
-    transition: 0.2s;
 }
 
-.coupleCuckoos:hover {
+.videos:hover {
     transition: 0.2s;
     transform: scale(1.30);
     margin-right: 45px;
-    margin-left: 45px;
+    margin-left: 48px;
     margin-top: -45px;
 }
 
-.coupleCuckoos {
+.videos {
     transition: 0.2s;
+}
+
+.removeMargin:hover {
+    margin-bottom: 45px;
 }
 
 #addList_input {
@@ -280,6 +283,7 @@ h1 {
 
 #list:hover {background-color: #ddd;}
 #play:hover {background-color: #9C0F16;}
+
 .dropdown:hover .dropdown-content {display: flex;}
 
 /* #saisonChoose {
