@@ -56,7 +56,7 @@ while ($user = $req->fetch()) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - LemonFlix</title>
-    <link rel="stylesheet" href="streaming_style.css">
+    <link rel="stylesheet" href="streamingStyle.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -148,7 +148,7 @@ while ($user = $req->fetch()) {
                                     if ($watched == $bddList) {
                                         echo('
                                         <input type="hidden" name="delList" value="'.$watched.'">
-                                        <input type="submit" value="Supprimer à ma liste" id="list">');
+                                        <input type="submit" value="Supprimer de ma liste" id="list">');
                                     } else {
                                         echo('
                                         <input type="hidden" name="addList" value="'.$watched.'">
@@ -157,7 +157,7 @@ while ($user = $req->fetch()) {
                                 }
                                         
                                 echo('</form>
-                                        <form action="player.php" method="post">
+                                        <form action="player.php" method="post" class="streaming_form">
                                             <input type="submit" value="Regarder" id="play">
                                             <input type="hidden" name="id" value='.$watched.'>
                                             <input type="hidden" name="user" value="NULL">
@@ -190,7 +190,7 @@ while ($user = $req->fetch()) {
                                             if ($coupleCuckoos1 == $bddList) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$coupleCuckoos1.'">
-                                                <input type="submit" value="Supprimer à ma liste" id="list">');
+                                                <input type="submit" value="Supprimer de ma liste" id="list">');
                                             } else {
                                                 echo('
                                                 <input type="hidden" name="addList" value="'.$coupleCuckoos1.'">
@@ -200,7 +200,7 @@ while ($user = $req->fetch()) {
 
                                     ?>
                                 </form>
-                                <form action="player.php" method="post">
+                                <form action="player.php" method="post" class="streaming_form">
                                     <input type="submit" value="Regarder" id="play">
                                     <input type="hidden" name="id" value="<?php echo($coupleCuckoos1); ?>">
                                     <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
@@ -229,7 +229,7 @@ while ($user = $req->fetch()) {
                                             if ($jujutsuKaisen == $bddList) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$jujutsuKaisen.'">
-                                                <input type="submit" value="Supprimer à ma liste" id="list">');
+                                                <input type="submit" value="Supprimer de ma liste" id="list">');
                                             } else {
                                                 echo('
                                                 <input type="hidden" name="addList" value="'.$jujutsuKaisen.'">
@@ -240,7 +240,7 @@ while ($user = $req->fetch()) {
                                     ?>
                                     
                                 </form>
-                                <form action="player.php" method="post">
+                                <form action="player.php" method="post" class="streaming_form">
                                     <input type="submit" value="Regarder" id="play">
                                     <input type="hidden" name="id" value="<?php echo($jujutsuKaisen); ?>">
                                     <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
@@ -270,7 +270,7 @@ while ($user = $req->fetch()) {
                                             if ($sao == $bddList) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$sao.'">
-                                                <input type="submit" value="Supprimer à ma liste" id="list">');
+                                                <input type="submit" value="Supprimer de ma liste" id="list">');
                                             } else {
                                                 echo('
                                                 <input type="hidden" name="addList" value="'.$sao.'">
@@ -280,7 +280,7 @@ while ($user = $req->fetch()) {
 
                                     ?>
                                 </form>
-                                <form action="player.php" method="post">
+                                <form action="player.php" method="post" class="streaming_form">
                                     <input type="submit" value="Regarder" id="play">
                                     <input type="hidden" name="id" value="<?php echo($sao); ?>">
                                     <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
@@ -310,7 +310,7 @@ while ($user = $req->fetch()) {
                                             if ($chainsaw == $bddList) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$chainsaw.'">
-                                                <input type="submit" value="Supprimer à ma liste" id="list">');
+                                                <input type="submit" value="Supprimer de ma liste" id="list">');
                                             } else {
                                                 echo('
                                                 <input type="hidden" name="addList" value="'.$chainsaw.'">
@@ -320,7 +320,7 @@ while ($user = $req->fetch()) {
 
                                     ?>
                                 </form>
-                                <form action="player.php" method="post">
+                                <form action="player.php" method="post" class="streaming_form">
                                     <input type="submit" value="Regarder" id="play">
                                     <input type="hidden" name="id" value="<?php echo($chainsaw); ?>">
                                     <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
@@ -350,7 +350,7 @@ while ($user = $req->fetch()) {
                                             if ($blueLock == $bddList) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$blueLock.'">
-                                                <input type="submit" value="Supprimer à ma liste" id="list">');
+                                                <input type="submit" value="Supprimer de ma liste" id="list">');
                                             } else {
                                                 echo('
                                                 <input type="hidden" name="addList" value="'.$blueLock.'">
@@ -360,7 +360,7 @@ while ($user = $req->fetch()) {
 
                                     ?>
                                 </form>
-                                <form action="player.php" method="post">
+                                <form action="player.php" method="post" class="streaming_form">
                                     <input type="submit" value="Regarder" id="play">
                                     <input type="hidden" name="id" value="<?php echo($blueLock); ?>">
                                     <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
@@ -390,7 +390,7 @@ while ($user = $req->fetch()) {
                                             if ($mha == $bddList) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$mha.'">
-                                                <input type="submit" value="Supprimer à ma liste" id="list">');
+                                                <input type="submit" value="Supprimer de ma liste" id="list">');
                                             } else {
                                                 echo('
                                                 <input type="hidden" name="addList" value="'.$mha.'">
@@ -400,7 +400,7 @@ while ($user = $req->fetch()) {
 
                                     ?>
                                 </form>
-                                <form action="player.php" method="post">
+                                <form action="player.php" method="post" class="streaming_form">
                                     <input type="submit" value="Regarder" id="play">
                                     <input type="hidden" name="id" value="<?php echo($mha); ?>">
                                     <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
@@ -436,7 +436,7 @@ while ($user = $req->fetch()) {
                                             if ($topGun == $bddList) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$topGun.'">
-                                                <input type="submit" value="Supprimer à ma liste" id="list">');
+                                                <input type="submit" value="Supprimer de ma liste" id="list">');
                                             } else {
                                                 echo('
                                                 <input type="hidden" name="addList" value="'.$topGun.'">
@@ -446,7 +446,7 @@ while ($user = $req->fetch()) {
 
                                     ?>
                                 </form>
-                                <form action="player.php" method="post">
+                                <form action="player.php" method="post" class="streaming_form">
                                     <input type="submit" value="Regarder" id="play">
                                     <input type="hidden" name="id" value="<?php echo($topGun); ?>">
                                     <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
@@ -476,7 +476,7 @@ while ($user = $req->fetch()) {
                                             if ($Thor == $bddList) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$Thor.'">
-                                                <input type="submit" value="Supprimer à ma liste" id="list">');
+                                                <input type="submit" value="Supprimer de ma liste" id="list">');
                                             } else {
                                                 echo('
                                                 <input type="hidden" name="addList" value="'.$Thor.'">
@@ -486,7 +486,7 @@ while ($user = $req->fetch()) {
 
                                     ?>
                                 </form>
-                                <form action="player.php" method="post">
+                                <form action="player.php" method="post" class="streaming_form">
                                     <input type="submit" value="Regarder" id="play">
                                     <input type="hidden" name="id" value="<?php echo($Thor); ?>">
                                     <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
@@ -517,7 +517,7 @@ while ($user = $req->fetch()) {
                                             if ($Minions == $bddList) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$Minions.'">
-                                                <input type="submit" value="Supprimer à ma liste" id="list">');
+                                                <input type="submit" value="Supprimer de ma liste" id="list">');
                                             } else {
                                                 echo('
                                                 <input type="hidden" name="addList" value="'.$Minions.'">
@@ -527,7 +527,7 @@ while ($user = $req->fetch()) {
 
                                     ?>
                                 </form>
-                                <form action="player.php" method="post">
+                                <form action="player.php" method="post" class="streaming_form">
                                     <input type="submit" value="Regarder" id="play">
                                     <input type="hidden" name="id" value="<?php echo($Minions); ?>">
                                     <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
@@ -563,7 +563,7 @@ while ($user = $req->fetch()) {
                                             <input type="hidden" name="delList" value="'.$list.'">
                                             <input type="submit" value="Supprimer de ma liste" id="list">
                                         </form>
-                                        <form action="player.php" method="post">
+                                        <form action="player.php" method="post" class="streaming_form">
                                             <input type="submit" value="Regarder" id="play">
                                             <input type="hidden" name="id" value="'.$list.'">
                                             <input type="hidden" name="user" value="'.$pseudo.'">
@@ -581,8 +581,8 @@ while ($user = $req->fetch()) {
         
     </div>
 
-    <script src="../Netflix/js/coupleCuckoosScript.js"></script>
-    <script src="../Netflix/js/fadeEffects.js"></script>
+    <script src="../Netflix/js/coupleCuckoosMenu.js"></script>
+    <script src="../Netflix/js/fadeEffect.js"></script>
     <script src="../Netflix/js/Anime_carrousel.js"></script>
 </body>
 </html>

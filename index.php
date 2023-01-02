@@ -4,6 +4,29 @@ session_start();
 require('src/log.php');
 require('src/connect.php');
 
+if(!empty($_SESSION['email_register']) && !empty($_SESSION['password_register'])) {
+	$email 		= htmlspecialchars($_SESSION['email_register']);
+	$password 	= htmlspecialchars($_SESSION['password_register']);
+
+	$password = "aq1".sha1($password."123")."25";
+
+	$req = $db->prepare("SELECT * FROM user WHERE email = ?");
+	$req->execute(array($email));
+	while($user = $req->fetch()){
+		$_SESSION['connect']	 = 1;
+		$_SESSION['email']   	 = $user['email'];
+		$secretCode 			 = $user['secret_code'];
+
+		if (isset($_POST['auto'])) {
+			setcookie('auth', $user['secret'], time() + 364*24*3600, '/', null, false, true);
+			setcookie('secretCode', $secretCode, time() + 364*24*3600, '/', null, false, true);
+		}
+
+		header('location: Netflix/main.php');
+		exit();
+	}
+}
+
 if(!empty($_POST['email']) && !empty($_POST['password'])){
 	$email 		= htmlspecialchars($_POST['email']);
 	$password 	= htmlspecialchars($_POST['password']);

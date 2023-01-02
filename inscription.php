@@ -83,10 +83,11 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passw
 
 	setcookie('secretCode', $secretCode, time()+3600*24, '/', '', false, false);
 
+	$_SESSION["email_register"] = $email;
+	$_SESSION["password_register"] = $password;
+
 	header('location: index.php');
 	exit();
-
-
 }
 
 ?>
