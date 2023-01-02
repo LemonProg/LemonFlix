@@ -2,6 +2,8 @@
 require('../src/connect.php');
 
 $Code = htmlspecialchars($_COOKIE['secretCode']);
+$isCodeValid = True;
+
 
 $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
 $req->execute(array($Code));
@@ -86,42 +88,52 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
     if (!empty($_POST['code'])) {
         $codeImport = htmlspecialchars($_POST['code']);
         
-        $req = $db->prepare("SELECT * FROM saved_profils WHERE code = ?");
-            $req->execute(array($codeImport));
+        $req = $db->prepare("SELECT code FROM saved_profils");
+        $req->execute();
 
-            while ($user = $req->fetch()) {
-                $imported_pseudo = htmlspecialchars($user['pseudo']);
-                $imported_url = htmlspecialchars($user['url']);
-                $imported_watched = htmlspecialchars($user['watched']);
-            
-                $req = $db->prepare("SELECT count(*) as numberPseudo FROM profile$id_profile WHERE pseudo = ?");
-                $req->execute(array($imported_pseudo));
-
-                while($email_verification = $req->fetch()){
-
-                    if($email_verification['numberPseudo'] != 0){
-
-                        header('location: AddProfile.php?errorCode=1');
-                        exit();
-
-                    }
-                }
-
-                if (!empty($imported_watched)) {
-                    $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url, watched, imported) VALUES(?,?,?,?)");
-                    $req->execute(array($imported_pseudo, $imported_url, $imported_watched, "true"));
-
-                    header('location: main.php');
-                    exit();
-                } else{
-                    $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url, imported) VALUES(?,?,?)");
-                    $req->execute(array($imported_pseudo, $imported_url, "true"));
-
-                    header('location: main.php');
-                    exit();
-                }
-                
+        while ($codeVerif = $req->fetch()) {
+            if(str_contains($codeVerif[0], $codeImport)) {
+                $isCodeValid = True;
+            } else {
+                $isCodeValid = False;
             }
+        }
+        $req = $db->prepare("SELECT * FROM saved_profils WHERE code = ?");
+        $req->execute(array($codeImport));
+
+        while ($user = $req->fetch()) {
+            $imported_pseudo = htmlspecialchars($user['pseudo']);
+            $imported_url = htmlspecialchars($user['url']);
+            $imported_watched = htmlspecialchars($user['watched']);
+        
+            $req = $db->prepare("SELECT count(*) as numberPseudo FROM profile$id_profile WHERE pseudo = ?");
+            $req->execute(array($imported_pseudo));
+
+            while($email_verification = $req->fetch()){
+
+                if($email_verification['numberPseudo'] != 0){
+
+                    header('location: AddProfile.php?errorCode=1');
+                    exit();
+
+                }
+            }
+
+            if (!empty($imported_watched)) {
+                $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url, watched, imported) VALUES(?,?,?,?)");
+                $req->execute(array($imported_pseudo, $imported_url, $imported_watched, "true"));
+
+                header('location: main.php');
+                exit();
+            } else{
+                $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url, imported) VALUES(?,?,?)");
+                $req->execute(array($imported_pseudo, $imported_url, "true"));
+
+                header('location: main.php');
+                exit();
+            }
+            
+        }
     }
 ?>
 
@@ -194,6 +206,9 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
         }
         if(isset($_GET['errorCode'])) {
             echo("<script src='js/addProfilsCodeError.js'></script>");
+        }
+        if($isCodeValid == False) {
+            echo("<script src='js/addProfilsInvalidCode.js'></script>");
         }
 
     ?>
