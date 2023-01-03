@@ -46,8 +46,6 @@ $db = new PDO('mysql:host=localhost;dbname=lemonflix;charset=utf8','root', '');
         $animes = strtolower($animes);
         $search = strtolower($search);
 
-        
-
         $animes_cut = substr($animes,0, adaptCut($animes));
 
         if(str_starts_with($search, $animes_cut)) {
