@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['connect'])) {
+    error_reporting(0);
+    header("location: ../index.php");
+} else {
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +68,7 @@ while ($saved_user = $req->fetch()) {
         echo("<div class='codeDiv'><span>$savePro_code</span></div>");
     }
     }}}}
-
+}
 ?>
 </body>
 </html>

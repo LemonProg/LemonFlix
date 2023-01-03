@@ -3,7 +3,7 @@ if(!empty($_POST['name'])) {
     $search = $_POST['name'];
 }
 
-$db = new PDO('mysql:host=localhost;dbname=recherche;charset=utf8','root', '');
+$db = new PDO('mysql:host=localhost;dbname=lemonflix;charset=utf8','root', '');
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ $db = new PDO('mysql:host=localhost;dbname=recherche;charset=utf8','root', '');
         }
     }
 
-    $req = $db->prepare("SELECT * FROM animes");
+    $req = $db->prepare("SELECT * FROM streaming");
     $req->execute();
 
     while($user = $req->fetch()){
@@ -45,6 +45,8 @@ $db = new PDO('mysql:host=localhost;dbname=recherche;charset=utf8','root', '');
     
         $animes = strtolower($animes);
         $search = strtolower($search);
+
+        
 
         $animes_cut = substr($animes,0, adaptCut($animes));
 

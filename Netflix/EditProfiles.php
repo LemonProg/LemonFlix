@@ -1,7 +1,13 @@
 <?php
+session_start();
 if (!empty($_COOKIE['user'])) {
     $pseudoCookie = htmlspecialchars($_COOKIE['user']);
 }
+
+if (!isset($_SESSION['connect'])) {
+    error_reporting(0);
+    header("location: ../index.php");
+} else {
 
 ?>
 <!DOCTYPE html>
@@ -88,6 +94,8 @@ if (!empty($_COOKIE['user'])) {
 </html>
 
 <?php
+}
+
 if(!empty($_POST['pseudo']) && (!empty($_POST['url']))) {
     require('../src/connect.php');
 

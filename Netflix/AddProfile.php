@@ -1,9 +1,13 @@
 <?php
-require('../src/connect.php');
+session_start();
+if (!isset($_SESSION['connect'])) {
+    error_reporting(0);
+    header("location: ../index.php");
+}
 
+require('../src/connect.php');
 $Code = htmlspecialchars($_COOKIE['secretCode']);
 $isCodeValid = True;
-
 
 $req = $db->prepare("SELECT * FROM user WHERE secret_code = ?");
 $req->execute(array($Code));
@@ -149,6 +153,7 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
+    <?php if (isset($_SESSION['connect'])) { ?>
     <header>
         <form action="../index.php" id="logo">
             <input type="image" src="../img/LemonFlix.png" alt="Submit">
@@ -215,6 +220,8 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
     <footer>
         <p class="footer">&copy; Copyright 2022 - LemonFlix</p>
     </footer>
+
+    <?php } ?>
 </body>
 </html>
 

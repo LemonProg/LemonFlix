@@ -1,3 +1,11 @@
+<?php 
+session_start();
+if (!isset($_SESSION['connect'])) {
+    error_reporting(0);
+    header("location: ../index.php");
+} else {
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -36,3 +44,5 @@
     </div>
 </body>
 </html>
+
+<?php }?>

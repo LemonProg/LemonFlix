@@ -1,5 +1,9 @@
 <?php
-error_reporting(0);
+session_start();
+if (!isset($_SESSION['connect'])) {
+    error_reporting(0);
+    header("location: ../index.php");
+} else {
 require('../src/connect.php');
 
 $pseudo = htmlspecialchars($_POST['user']);
@@ -586,3 +590,5 @@ while ($user = $req->fetch()) {
     <script src="../Netflix/js/Anime_carrousel.js"></script>
 </body>
 </html>
+
+<?php }?>
