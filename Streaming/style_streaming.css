@@ -12,18 +12,32 @@ body {
     animation: fadeStart 0.5s;
 }
 
-#logo input {
+#logo input[type="image"] {
 	padding: 20px 0 0 var(--main-margin-left);
     transition: 0.3s;
 }
 
-#logo input:hover {
+#logo input[type="image"]:hover {
     transform: scale(0.9);
 }
 
-#logo input {
+#logo input[type="image"] {
 	height: 30px;
     size: 7px;
+}
+
+#searchBar {
+    position: absolute;
+    top: 40px;
+    left: 810px;
+    text-align: center;
+    padding: 5px;
+    width: 300px;
+    font-size: 20px;
+    border-radius: 7px;
+    background-color: #494949;
+    color: white;
+    border: none;
 }
 
 a {
@@ -95,13 +109,6 @@ h2 {
     margin-left: var(--main-margin-left);
 }
 
-.menu_reprendre {
-    display: flex;
-    flex-direction: column;
-    margin-left: var(--main-margin-left);
-    gap: 14px;
-}
-
 .animeCase{
     width: 320px;
     height: 180px;
@@ -113,6 +120,10 @@ h2 {
     margin-right: 45px;
     margin-left: 48px;
     margin-top: -45px;
+}
+
+.fixMargin:hover {
+    margin-bottom: 45px;
 }
 
 .videos {
@@ -163,7 +174,7 @@ ul {
     gap: 15px;
 }
 
-#popup li input{
+.pushBtnEP{
     padding: 15px 35px 15px 35px;
     font-size: 20px;
     text-align: center;
@@ -175,7 +186,7 @@ ul {
     border-radius: 10px;
 }
 
-#popup li input:hover {
+.pushBtnEP:hover {
     transition: 0.2s;
     transform: scale(0.9);
 }
@@ -271,7 +282,7 @@ h1 {
     color: white;
 }
 
-.dropdown-content input{
+.dropdown-content input[type="submit"]{
     min-width: 160px;
     color: black;
     padding: 16px 16px;

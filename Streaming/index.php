@@ -1,15 +1,18 @@
 <?php
 session_start();
+// error_reporting(0);
 if (!isset($_SESSION['connect'])) {
-    error_reporting(0);
     header("location: ../index.php");
 } else {
 require('../src/connect.php');
 
-$pseudo = htmlspecialchars($_POST['user']);
-
-if ($pseudo != '') {
-    setcookie('pseudoUser', $pseudo, time()+3600*24, '/', '', false, false);
+if (!empty($_POST['user'])) {
+    $pseudo = htmlspecialchars($_POST['user']);
+    if ($_POST['user'] != '') {
+        setcookie('pseudoUser', $pseudo, time()+3600*24, '/', '', false, false);
+    }
+} else {
+    $pseudo = htmlspecialchars($_COOKIE['pseudoUser']);
 }
 
 $Code = htmlspecialchars($_COOKIE['secretCode']);
@@ -60,7 +63,7 @@ while ($user = $req->fetch()) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - LemonFlix</title>
-    <link rel="stylesheet" href="streamingStyle.css">
+    <link rel="stylesheet" href="style_streaming.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -82,21 +85,21 @@ while ($user = $req->fetch()) {
                     </li> -->
                     <form action="player.php" method="post" class="streaming_form">
                         <li>
-                            <input type="submit" value="Épisode 1">
+                            <input type="submit" value="Épisode 1" class="pushBtnEP">
                             <input type="hidden" name="id" value="<?php echo($coupleCuckoos1); ?>">
                             <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
                         </li>
                     </form>
                     <form action="player.php" method="post" class="streaming_form">
                         <li>
-                            <input type="submit" value="Épisode 2">
+                            <input type="submit" value="Épisode 2" class="pushBtnEP">
                             <input type="hidden" name="id" value="<?php echo($coupleCuckoos2); ?>">
                             <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
                         </li>
                     </form>
                     <form action="player.php" method="post" class="streaming_form">
                         <li>
-                            <input type="submit" value="Épisode 3">
+                            <input type="submit" value="Épisode 3" class="pushBtnEP">
                             <input type="hidden" name="id" value="<?php echo($coupleCuckoos3); ?>">
                             <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
                         </li>
@@ -116,6 +119,12 @@ while ($user = $req->fetch()) {
                             <input type="image" src="../img/LemonFlix.png" alt="Submit">
                         </li>
                         <li>
+                            </form>
+                            <form action="index.php" id="searchForm" method="post">
+                                <input type="search" name="search" id="searchBar" placeholder="Chercher...">
+                            </form>
+                        </li>
+                        <li>
                             <div id="logoutDiv">
                                 <?php
                                     echo('<img src="'.$url.'" alt="profile_img" id="profile_img">');
@@ -125,14 +134,103 @@ while ($user = $req->fetch()) {
                             </div>
                         </li>
                     </ul>
-                </form>
             </div>
         </header>
         <?php 
+            function adaptCut($animeName) {
+                if (strlen($animeName) <= 6) {
+                    return -3;
+                } 
+                if (strlen($animeName) <= 9) {
+                    return -6;
+                } 
+                if (strlen($animeName) <= 14) {
+                    return -7;
+                }
+                if (strlen($animeName) <= 16) {
+                    return -11;
+                }
+                if (strlen($animeName) > 16) {
+                    return -13;
+                }
+            }
+            
+            if(!empty($_POST['search'])) {
+                $search = htmlspecialchars($_POST['search']);
+            
+                $req = $db->prepare("SELECT * FROM streaming");
+                $req->execute();
+            
+                while($user = $req->fetch()){
+                    $animes = $user['name'];
+            
+                    $animes = strtolower($animes);
+                    $search = strtolower($search);
+            
+                    $animes_cut = substr($animes,0, adaptCut($animes));
+            
+                    if(str_starts_with($search, $animes_cut)) {
+                        $req = $db->prepare("SELECT * FROM streaming WHERE name = ?");
+                        $req->execute(array($animes));
+            
+                        while($id = $req->fetch()){
+                            $animeId = $id['id'];
+                            $animeImg = $id['img'];
+
+                            echo('
+                            <h2 class="h2_margin">Recherche -</h2>
+                            <div class="menu">
+                                <form action="player.php" method="post" class="streaming_form">
+                                    <div class="videos fixMargin">
+                                        <div class="dropdown">
+                                            <input type="image" src="'.$animeImg.'" value="Submit" class="animeCase">
+                                            <input type="hidden" name="id" value="'.$animeId.'">
+                                            <input type="hidden" name="user" value="'.$pseudo.'">
+                                            </form>
+                                            <div class="dropdown-content">
+                                                <form action="index.php" method="post">
+                                                    '); 
+                                                        $req = $db->prepare("SELECT list FROM profile$id_profile WHERE pseudo = ?");
+                                                        $req->execute(array($pseudo));
+                
+                                                        while ($user = $req->fetch()) {
+                                                            $bddList = $user[0];
+                
+                                                            if ($animeId == $bddList) {
+                                                                echo('
+                                                                <input type="hidden" name="delList" value="'.$animeId.'">
+                                                                <input type="submit" value="Supprimer de ma liste" id="list">');
+                                                            } else {
+                                                                echo('
+                                                                <input type="hidden" name="addList" value="'.$animeId.'">
+                                                                <input type="submit" value="Ajouter à ma liste" id="list">');
+                                                            }
+                                                        }
+                
+                                                    echo('
+                                                    
+                                                </form>
+                                                <form action="player.php" method="post" class="streaming_form">
+                                                    <input type="submit" value="Regarder" id="play">
+                                                    <input type="hidden" name="id" value="'.$animeId.'">
+                                                    <input type="hidden" name="user" value="'.$pseudo.'">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>    
+                            </div>
+                                
+                            ');
+                        }
+                    }
+                }
+            }
+
             if (isset($watched)) {
                 echo('
-                    <h2 class="h2_margin">Reprendre avec le profile de <strong>'.$pseudo.'</strong> -</h2>
-                    <div class="menu_reprendre">
+                    <h2>Reprendre avec le profile de <strong>'.$pseudo.'</strong> -</h2>
+                    <div class="menu">
                         <form action="player.php" method="post" class="streaming_form">
                             <div class="videos removeMargin">
                                 <div class="dropdown">
@@ -588,7 +686,7 @@ while ($user = $req->fetch()) {
     <script src="../Netflix/js/coupleCuckoosMenu.js"></script>
     <script src="../Netflix/js/fadeEffect.js"></script>
     <script src="../Netflix/js/Anime_carrousel.js"></script>
+    <script src="../Netflix/js/searchScript.js"></script>
 </body>
 </html>
-
-<?php }?>
+<?php } ?>
