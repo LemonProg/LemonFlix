@@ -27,16 +27,52 @@ while ($user = $req->fetch()) {
         $pseudo = htmlspecialchars($_COOKIE['pseudoUser']);
     
         $list_id = htmlspecialchars($_POST['addList']);
+
+        $req = $db->prepare("SELECT list FROM profile$id_profile WHERE pseudo = ?");
+        $req->execute(array($pseudo));
+
+        while ($list = $req->fetch()) {
+            $listRecover = $list['list'];
+            
+            if(!empty($listRecover)) {
+                $finalPush = $listRecover."/".$list_id;
+
+                $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
+                $req->execute(array($finalPush, $pseudo));
+            } else {
+                $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
+                $req->execute(array($list_id, $pseudo));
+            }
+
+           
+        }
     
-        $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
-        $req->execute(array($list_id, $pseudo));
     }
 
     if (!empty($_POST['delList'])) {
         $pseudo = htmlspecialchars($_COOKIE['pseudoUser']);
+        $list_id = htmlspecialchars($_POST['delList']);
+
+        $req = $db->prepare("SELECT list FROM profile$id_profile WHERE pseudo = ?");
+        $req->execute(array($pseudo));
+
+        while ($list = $req->fetch()) {
+            $listRecover = $list['list'];
+
+            $arrayDB = explode("/", $listRecover);
+
+            if ($list_id == $arrayDB[0]) {
+                $finalPush = str_replace($list_id.'/', '', $listRecover);
+            } else {
+                $finalPush = str_replace('/'.$list_id, '', $listRecover);
+            }
+            
+
+            $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
+            $req->execute(array($finalPush, $pseudo));
+
+        }
     
-        $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
-        $req->execute(array(NULL, $pseudo));
     }
 
     $req = $db->prepare("SELECT * FROM profile$id_profile WHERE pseudo = ?");
@@ -647,35 +683,70 @@ while ($user = $req->fetch()) {
                 while ($user = $req->fetch()) {
                     $main_img = $user['img'];
                 }
-
                 if ($list != "") {
-                    echo('
-                    <h2>Ma Liste -</h2>
-                    <div class="menu">
-                        <form action="player.php" method="post" class="streaming_form">
-                            <div class="videos removeMargin">
-                                
-                                <div class="dropdown">
-                                    <input type="image" src="'.$main_img.'" value="Submit" class="animeCase">
-                                    <input type="hidden" name="id" value="'.$list.'">
-                                    <input type="hidden" name="user" value"'.$pseudo.'">
-                                    </form>
-                                    <div class="dropdown-content">
-                                        <form action="index.php" method="post">
-                                            <input type="hidden" name="delList" value="'.$list.'">
-                                            <input type="submit" value="Supprimer de ma liste" id="list">
+                    echo('<h2>Ma Liste -</h2>
+                        <div class="menu">');
+                    if(str_contains($list, '/')) {
+                        $arrayList = explode("/", $list);
+                        foreach($arrayList as $id) {
+                            $req = $db->prepare("SELECT * FROM streaming WHERE id = ?");
+                            $req->execute(array($id));
+
+                            while ($user = $req->fetch()) {
+                                $img = $user['img'];
+                            }
+                            echo('
+                                <form action="player.php" method="post" class="streaming_form">
+                                    <div class="videos removeMargin">
+                                        <div class="dropdown">
+                                            <input type="image" src="'.$img.'" value="Submit" class="animeCase">
+                                            <input type="hidden" name="id" value="'.$id.'">
+                                            <input type="hidden" name="user" value"'.$pseudo.'">
+                                            </form>
+                                            <div class="dropdown-content">
+                                                <form action="index.php" method="post">
+                                                    <input type="hidden" name="delList" value="'.$id.'">
+                                                    <input type="submit" value="Supprimer de ma liste" id="list">
+                                                </form>
+                                                <form action="player.php" method="post" class="streaming_form">
+                                                    <input type="submit" value="Regarder" id="play">
+                                                    <input type="hidden" name="id" value="'.$id.'">
+                                                    <input type="hidden" name="user" value="'.$pseudo.'">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            ');
+                        }
+                        echo("</div>");
+                    
+                    } else {
+                        echo('
+                            <form action="player.php" method="post" class="streaming_form">
+                                <div class="videos removeMargin">
+                                    <div class="dropdown">
+                                        <input type="image" src="'.$main_img.'" value="Submit" class="animeCase">
+                                        <input type="hidden" name="id" value="'.$list.'">
+                                        <input type="hidden" name="user" value"'.$pseudo.'">
                                         </form>
-                                        <form action="player.php" method="post" class="streaming_form">
-                                            <input type="submit" value="Regarder" id="play">
-                                            <input type="hidden" name="id" value="'.$list.'">
-                                            <input type="hidden" name="user" value="'.$pseudo.'">
-                                        </form>
+                                        <div class="dropdown-content">
+                                            <form action="index.php" method="post">
+                                                <input type="hidden" name="delList" value="'.$list.'">
+                                                <input type="submit" value="Supprimer de ma liste" id="list">
+                                            </form>
+                                            <form action="player.php" method="post" class="streaming_form">
+                                                <input type="submit" value="Regarder" id="play">
+                                                <input type="hidden" name="id" value="'.$list.'">
+                                                <input type="hidden" name="user" value="'.$pseudo.'">
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    ');
+                            </form>
+                        </div>
+                        ');
+                    }
                 }
 
             }} 
