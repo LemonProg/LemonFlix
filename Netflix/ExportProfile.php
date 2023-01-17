@@ -49,6 +49,7 @@ $url = $user['url'];
 $watched = $user['watched'];
 $id_user = $user['id'];
 $imported = $user['imported'];
+$list = $user['list'];
 
 if ($imported == "true") {
     echo('<h2 class="cannotExport">Le profile "'.$pseudo.'" a été importé, il ne peut donc être exporter à nouveau</h2>');
@@ -60,9 +61,10 @@ $req->execute(array($id_user));
 while ($saved_user = $req->fetch()) {
     if ($saved_user['id_user'] == $id_user) {
         $savePro_code = $saved_user['code'];
+        
+        $req = $db->prepare("UPDATE saved_profils SET pseudo = ?, url = ?, watched = ?, list = ? WHERE id_user = ?");
 
-        $req = $db->prepare("UPDATE saved_profils SET pseudo = ?, url = ?, watched = ? WHERE id_user = ?");
-        $req->execute(array($pseudo, $url, $watched, $id_user));
+        $req->execute(array($pseudo, $url, $watched, $list, $id_user));
 
         echo("<h2>Votre Code publique :</h2>");
         echo("<div class='codeDiv'><span>$savePro_code</span></div>");

@@ -109,6 +109,7 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
             $imported_pseudo = htmlspecialchars($user['pseudo']);
             $imported_url = htmlspecialchars($user['url']);
             $imported_watched = htmlspecialchars($user['watched']);
+            $imported_list = htmlspecialchars($user['list']);
         
             $req = $db->prepare("SELECT count(*) as numberPseudo FROM profile$id_profile WHERE pseudo = ?");
             $req->execute(array($imported_pseudo));
@@ -122,20 +123,23 @@ $savePro_code = randLetter().randNumber().randLetter().randNumber();
 
                 }
             }
+            
+            $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url, imported) VALUES(?,?,?)");
+            $req->execute(array($imported_pseudo, $imported_url, "true"));
 
             if (!empty($imported_watched)) {
-                $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url, watched, imported) VALUES(?,?,?,?)");
-                $req->execute(array($imported_pseudo, $imported_url, $imported_watched, "true"));
+                $req = $db->prepare("UPDATE profile$id_profile set watched = ? WHERE pseudo = ?");
+                $req->execute(array($imported_watched, $imported_pseudo));
 
-                header('location: main.php');
-                exit();
-            } else{
-                $req = $db->prepare("INSERT INTO profile$id_profile(pseudo, url, imported) VALUES(?,?,?)");
-                $req->execute(array($imported_pseudo, $imported_url, "true"));
-
-                header('location: main.php');
-                exit();
             }
+
+            if (!empty($imported_list)) {
+                $req = $db->prepare("UPDATE profile$id_profile set list = ? WHERE pseudo = ?");
+                $req->execute(array($imported_list, $imported_pseudo));
+            }
+
+            header('location: main.php');
+            exit();
             
         }
     }
