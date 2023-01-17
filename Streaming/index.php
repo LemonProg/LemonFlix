@@ -231,8 +231,9 @@ while ($user = $req->fetch()) {
                 
                                                         while ($user = $req->fetch()) {
                                                             $bddList = $user[0];
+                                                            $arrayList = explode("/", $bddList);
                 
-                                                            if ($animeId == $bddList) {
+                                                            if (in_array($animeId, $arrayList)) {
                                                                 echo('
                                                                 <input type="hidden" name="delList" value="'.$animeId.'">
                                                                 <input type="submit" value="Supprimer de ma liste" id="list">');
@@ -282,8 +283,9 @@ while ($user = $req->fetch()) {
 
                                 while ($user = $req->fetch()) {
                                     $bddList = $user[0];
+                                    $arrayList = explode("/", $bddList);
 
-                                    if ($watched == $bddList) {
+                                    if (in_array($watched, $arrayList)) {
                                         echo('
                                         <input type="hidden" name="delList" value="'.$watched.'">
                                         <input type="submit" value="Supprimer de ma liste" id="list">');
@@ -324,8 +326,9 @@ while ($user = $req->fetch()) {
 
                                         while ($user = $req->fetch()) {
                                             $bddList = $user[0];
+                                            $arrayList = explode("/", $bddList);
 
-                                            if ($coupleCuckoos1 == $bddList) {
+                                            if (in_array($coupleCuckoos1, $arrayList)) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$coupleCuckoos1.'">
                                                 <input type="submit" value="Supprimer de ma liste" id="list">');
@@ -364,7 +367,7 @@ while ($user = $req->fetch()) {
                                         while ($user = $req->fetch()) {
                                             $bddList = $user[0];
 
-                                            if ($jujutsuKaisen == $bddList) {
+                                            if (in_array($jujutsuKaisen, $arrayList)) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$jujutsuKaisen.'">
                                                 <input type="submit" value="Supprimer de ma liste" id="list">');
@@ -405,7 +408,7 @@ while ($user = $req->fetch()) {
                                         while ($user = $req->fetch()) {
                                             $bddList = $user[0];
 
-                                            if ($sao == $bddList) {
+                                            if (in_array($sao, $arrayList)) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$sao.'">
                                                 <input type="submit" value="Supprimer de ma liste" id="list">');
@@ -445,7 +448,7 @@ while ($user = $req->fetch()) {
                                         while ($user = $req->fetch()) {
                                             $bddList = $user[0];
 
-                                            if ($chainsaw == $bddList) {
+                                            if (in_array($chainsaw, $arrayList)) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$chainsaw.'">
                                                 <input type="submit" value="Supprimer de ma liste" id="list">');
@@ -485,7 +488,7 @@ while ($user = $req->fetch()) {
                                         while ($user = $req->fetch()) {
                                             $bddList = $user[0];
 
-                                            if ($blueLock == $bddList) {
+                                            if (in_array($blueLock, $arrayList)) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$blueLock.'">
                                                 <input type="submit" value="Supprimer de ma liste" id="list">');
@@ -525,7 +528,7 @@ while ($user = $req->fetch()) {
                                         while ($user = $req->fetch()) {
                                             $bddList = $user[0];
 
-                                            if ($mha == $bddList) {
+                                            if (in_array($mha, $arrayList)) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$mha.'">
                                                 <input type="submit" value="Supprimer de ma liste" id="list">');
@@ -571,7 +574,7 @@ while ($user = $req->fetch()) {
                                         while ($user = $req->fetch()) {
                                             $bddList = $user[0];
 
-                                            if ($topGun == $bddList) {
+                                            if (in_array($topGun, $arrayList)) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$topGun.'">
                                                 <input type="submit" value="Supprimer de ma liste" id="list">');
@@ -611,7 +614,7 @@ while ($user = $req->fetch()) {
                                         while ($user = $req->fetch()) {
                                             $bddList = $user[0];
 
-                                            if ($Thor == $bddList) {
+                                            if (in_array($Thor, $arrayList)) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$Thor.'">
                                                 <input type="submit" value="Supprimer de ma liste" id="list">');
@@ -652,7 +655,7 @@ while ($user = $req->fetch()) {
                                         while ($user = $req->fetch()) {
                                             $bddList = $user[0];
 
-                                            if ($Minions == $bddList) {
+                                            if (in_array($Minions, $arrayList)) {
                                                 echo('
                                                 <input type="hidden" name="delList" value="'.$Minions.'">
                                                 <input type="submit" value="Supprimer de ma liste" id="list">');
