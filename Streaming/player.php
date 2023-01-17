@@ -29,9 +29,32 @@ if (!isset($_SESSION['connect'])) {
                 $id_profile = $user['id_profile'];
                 $id_ep = htmlspecialchars($_POST['id']);
                 $pseudo = htmlspecialchars($_POST['user']);
+                
+                $req = $db->prepare("SELECT * FROM profile$id_profile WHERE pseudo = ?");
+                $req->execute(array($pseudo));
 
-                $req = $db->prepare("UPDATE profile$id_profile SET watched = ? WHERE pseudo = ?");
-                $req->execute(array($id_ep, $pseudo));
+                while ($list = $req->fetch()) {
+                    $watchedRecover = $list['watched'];
+                    $watchedArray = explode("/", $watchedRecover);
+
+                    if(!empty($watchedRecover)) {
+                        if (!in_array($id_ep, $watchedArray)) {
+                            $arrayLength = sizeof($watchedArray);
+                            $finalPush = $watchedRecover."/".$id_ep;
+
+                            $req = $db->prepare("UPDATE profile$id_profile SET watched = ? WHERE pseudo = ?");
+                            $req->execute(array($finalPush, $pseudo));
+                        }
+
+                        
+                    } else {
+                        if (!in_array($id_ep, $watchedArray)) {
+                            $req = $db->prepare("UPDATE profile$id_profile SET watched = ? WHERE pseudo = ?");
+                            $req->execute(array($id_ep, $pseudo));
+                        }
+                    }
+
+                }
 
                 $req = $db->prepare("SELECT * FROM streaming WHERE id = ?");
                 $req->execute(array($id_ep));
@@ -40,8 +63,7 @@ if (!isset($_SESSION['connect'])) {
                     $url = $user['url'];
                     ?>
                     <iframe src='<?php echo($url); }} ?>' id='player' scrolling='no' frameborder='0' allowfullscreen></iframe>
-
-    </div>
+        </div>
 </body>
 </html>
 
