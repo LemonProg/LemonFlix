@@ -99,7 +99,7 @@ while ($user = $req->fetch()) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - LemonFlix</title>
-    <link rel="stylesheet" href="styles_streaming.css">
+    <link rel="stylesheet" href="Streaming_style.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
