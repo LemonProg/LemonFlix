@@ -1,2 +1,2 @@
-# Netflix
-Netflix connection page with php and mysql
+# Lemonflix
+LemonFlix is a anime/movie Streaming Website coded with php html and css without any framework
