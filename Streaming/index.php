@@ -612,127 +612,65 @@ while ($user = $req->fetch()) {
         </div>
         <h2>Films -</h2>
         <div class="menu">
-            <form action="player.php" method="post" class="streaming_form">
-                <!-- Top Gun -->
-                <?php $topGun = 3 ?>
-                <div class="videos">
-                    <div class="dropdown">
-                        <input type="image" src="main-imgs/topGun.jpg" value="Submit" class="animeCase">
-                        <input type="hidden" name="id" value="<?php echo($topGun); ?>">
-                        <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
-                            </form>
-                            <div class="dropdown-content">
-                                <form action="index.php" method="post">
-                                    <?php 
-                                        $req = $db->prepare("SELECT list FROM profile$id_profile WHERE pseudo = ?");
-                                        $req->execute(array($pseudo));
+            <?php
+            $req = $db->prepare("SELECT * FROM streaming WHERE type = ?");
+            $req->execute(array("movie"));
 
-                                        while ($user = $req->fetch()) {
-                                            $bddList = $user[0];
+            $arrayId = array();
+            $arrayURL = array();
 
-                                            if (in_array($topGun, $arrayList)) {
-                                                echo('
-                                                <input type="hidden" name="delList" value="'.$topGun.'">
-                                                <input type="submit" value="Supprimer de ma liste" id="list">');
-                                            } else {
-                                                echo('
-                                                <input type="hidden" name="addList" value="'.$topGun.'">
-                                                <input type="submit" value="Ajouter à ma liste" id="list">');
-                                            }
-                                        }
+            while ($streaming = $req->fetch()) {
+                $animesId = $streaming['id'];
+                $animeImg = $streaming['img'];
 
-                                    ?>
-                                </form>
-                                <form action="player.php" method="post" class="streaming_form">
-                                    <input type="submit" value="Regarder" id="play">
-                                    <input type="hidden" name="id" value="<?php echo($topGun); ?>">
-                                    <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
-                                </form>
-                            </div>
+                array_push($arrayId, $animesId);
+                array_push($arrayURL, $animeImg);
+            }
+
+            for ($i = 0; $i <= (count($arrayId) - 1); $i++) {
+                echo('
+                    <form action="player.php" method="post"
+                    class="streaming_form">
+                        <div class="videos">
+                            <div class="dropdown">
+                                <input type="image" src="'.$arrayURL[$i].'" value="Submit" class="animeCase">
+                                <input type="hidden" name="id" value="'.$arrayId[$i].'">
+                                <input type="hidden" name="user" value="'.$pseudo.'">
+                    <div class="dropdown-content">
+                    </form>
+                    ');
+                    $req = $db->prepare("SELECT list FROM profile$id_profile WHERE pseudo = ?");
+                    $req->execute(array($pseudo));
+
+                    while ($user = $req->fetch()) {
+                        $bddList = $user[0];
+
+                        if (in_array($arrayId[$i], $arrayList)) {
+                            echo('
+                            <form action="index.php" method="post">
+                                <input type="hidden" name="delList" value="'.$arrayId[$i].'">
+                                <input type="submit" value="Supprimer de ma liste" id="list">
+                            </form>');  
+                        } else {
+                            echo('
+                            <form action="index.php" method="post">
+                                <input type="hidden" name="addList" value="'.$arrayId[$i].'">
+                                <input type="submit" value="Ajouter à ma liste" id="list">
+                            </form> ');  
+                        }
+                    }
+
+                echo('
+                    <form action="player.php" method="post" class="streaming_form">
+                        <input type="submit" value="Regarder" id="play">
+                        <input type="hidden" name="id" value="'.$arrayId[$i].'">
+                        <input type="hidden" name="user" value="'.$pseudo.'">
+                    </form>
                     </div>
-                </div>
-            </form>
-            <form action="player.php" method="post" class="streaming_form">
-                <!-- Thor -->
-                <?php $Thor = 4 ?>
-                <div class="videos">
-                    <div class="dropdown">
-                        <input type="image" src="main-imgs/Thor.jpg" value="Submit" class="animeCase">
-                        <input type="hidden" name="id" value="<?php echo($Thor); ?>">
-                        <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
-                            </form>
-                            <div class="dropdown-content">
-                                <form action="index.php" method="post">
-                                    <?php 
-                                        $req = $db->prepare("SELECT list FROM profile$id_profile WHERE pseudo = ?");
-                                        $req->execute(array($pseudo));
-
-                                        while ($user = $req->fetch()) {
-                                            $bddList = $user[0];
-
-                                            if (in_array($Thor, $arrayList)) {
-                                                echo('
-                                                <input type="hidden" name="delList" value="'.$Thor.'">
-                                                <input type="submit" value="Supprimer de ma liste" id="list">');
-                                            } else {
-                                                echo('
-                                                <input type="hidden" name="addList" value="'.$Thor.'">
-                                                <input type="submit" value="Ajouter à ma liste" id="list">');
-                                            }
-                                        }
-
-                                    ?>
-                                </form>
-                                <form action="player.php" method="post" class="streaming_form">
-                                    <input type="submit" value="Regarder" id="play">
-                                    <input type="hidden" name="id" value="<?php echo($Thor); ?>">
-                                    <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
-                                </form>
-                            </div>
                     </div>
-                </div>
-            </form>
-            <form action="player.php" method="post" class="streaming_form">
-                <!-- les Minions -->
-                <?php $Minions = 8 ?>
-                <div class="videos">
-                    
-                    <div class="dropdown">
-                        <input type="image" src="main-imgs/Minions.jfif" value="Submit" class="animeCase">
-                        <input type="hidden" name="id" value="<?php echo($Minions); ?>">
-                        <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
-                            </form>
-                            <div class="dropdown-content">
-                                <form action="index.php" method="post">
-                                    <?php 
-                                        $req = $db->prepare("SELECT list FROM profile$id_profile WHERE pseudo = ?");
-                                        $req->execute(array($pseudo));
-
-                                        while ($user = $req->fetch()) {
-                                            $bddList = $user[0];
-
-                                            if (in_array($Minions, $arrayList)) {
-                                                echo('
-                                                <input type="hidden" name="delList" value="'.$Minions.'">
-                                                <input type="submit" value="Supprimer de ma liste" id="list">');
-                                            } else {
-                                                echo('
-                                                <input type="hidden" name="addList" value="'.$Minions.'">
-                                                <input type="submit" value="Ajouter à ma liste" id="list">');
-                                            }
-                                        }
-
-                                    ?>
-                                </form>
-                                <form action="player.php" method="post" class="streaming_form">
-                                    <input type="submit" value="Regarder" id="play">
-                                    <input type="hidden" name="id" value="<?php echo($Minions); ?>">
-                                    <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
-                                </form>
-                            </div>
-                    </div>
-                </div>
-            </form>
+                    </div>');
+            } ?>
+            </div>
         </div>
         
         <?php
