@@ -40,7 +40,7 @@ if (!isset($_SESSION['connect'])) {
                     if(!empty($watchedRecover)) {
                         if (!in_array($id_ep, $watchedArray)) {
                             $arrayLength = sizeof($watchedArray);
-                            $finalPush = $watchedRecover."/".$id_ep;
+                            $finalPush = $id_ep."/".$watchedRecover;
 
                             $req = $db->prepare("UPDATE profile$id_profile SET watched = ? WHERE pseudo = ?");
                             $req->execute(array($finalPush, $pseudo));

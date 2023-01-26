@@ -277,7 +277,10 @@ while ($user = $req->fetch()) {
                     ');
                 if(str_contains($watched, '/')) {
                     $arrayWatched = explode("/", $watched);
+                    $count = 0;
                     foreach($arrayWatched as $id) {
+                        $count++;
+
                         $req = $db->prepare("SELECT * FROM streaming WHERE id = ?");
                         $req->execute(array($id));
 
@@ -288,7 +291,14 @@ while ($user = $req->fetch()) {
                             <form action="player.php" method="post" class="streaming_form">
                                 <div class="videos removeMargin">
                                     <div class="dropdown">
-                                        <input type="image" src='.$img.' value="Submit" class="animeCase">
+                                        <input type="image" src='.$img.' value="Submit" class="animeCase"'); 
+                                        if ($count == 6) { 
+                                            echo('id="lastOne_watched"'); 
+                                        }
+                                        if ($count == 5) { 
+                                            echo('id="secondeOne_watched"'); 
+                                        } 
+                        echo('>
                                         <input type="hidden" name="id" value='.$id.'>
                                         <input type="hidden" name="user" value="NULL">
                                         </form>
@@ -368,7 +378,8 @@ while ($user = $req->fetch()) {
                                         </div>
                                     </div>
                                 </div>
-                            </form>');
+                            </form>
+                            </div>');
                 }
                 echo("</div>");
             }
@@ -801,9 +812,9 @@ while ($user = $req->fetch()) {
         
     </div>
 
-    <script src="../Netflix/js/carrousel_watch.js"></script>
+    <script src="../Netflix/js/watched_carrou.js"></script>
     <script src="../Netflix/js/coupleCuckoosMenu.js"></script>
-    <script src="../Netflix/js/fadeEffect.js"></script>
+    <script src="../Netflix/js/fadeEffects.js"></script>
     <script src="../Netflix/js/carrousel_anime.js"></script>
     <script src="../Netflix/js/searchScript.js"></script>
 </body>
