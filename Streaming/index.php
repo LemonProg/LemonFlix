@@ -33,17 +33,20 @@ while ($user = $req->fetch()) {
 
         while ($list = $req->fetch()) {
             $listRecover = $list['list'];
-            
-            if(!empty($listRecover)) {
-                $finalPush = $listRecover."/".$list_id;
 
-                $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
-                $req->execute(array($finalPush, $pseudo));
-            } else {
-                $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
-                $req->execute(array($list_id, $pseudo));
+            $arrayListDB = explode("/", $listRecover);
+
+            if(!in_array($list_id, $arrayListDB)) {
+                if(!empty($listRecover)) {
+                    $finalPush = $listRecover."/".$list_id;
+
+                    $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
+                    $req->execute(array($finalPush, $pseudo));
+                } else {
+                    $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
+                    $req->execute(array($list_id, $pseudo));
+                }
             }
-
            
         }
     
@@ -70,6 +73,7 @@ while ($user = $req->fetch()) {
 
             $req = $db->prepare("UPDATE profile$id_profile SET list = ? WHERE pseudo = ?");
             $req->execute(array($finalPush, $pseudo));
+
 
         }
     
