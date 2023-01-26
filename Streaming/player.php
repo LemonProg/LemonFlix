@@ -56,8 +56,13 @@ if (!isset($_SESSION['connect'])) {
 
                 }
 
-                $req = $db->prepare("SELECT * FROM streaming WHERE id = ?");
-                $req->execute(array($id_ep));
+                if(!empty($_POST['op'])) {
+                    $req = $db->prepare("SELECT * FROM onepiece WHERE ep = ?");
+                    $req->execute(array($id_ep));
+                } else {
+                    $req = $db->prepare("SELECT * FROM streaming WHERE id = ?");
+                    $req->execute(array($id_ep));
+                }
 
                 while ($user = $req->fetch()) {
                     $url = $user['url'];

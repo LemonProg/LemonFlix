@@ -256,6 +256,14 @@ h1 {
     height: 180px;
 }
 
+.watched_container {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    width: 1680px;
+    height: 180px;
+}
+
 .button {
     position: absolute;
     width: 40px;
@@ -286,6 +294,36 @@ h1 {
 }
 
 #d:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    transform: rotate(0deg);
+    transition: 0.3s ease;
+}
+
+#g_watched {
+    left: 0px;
+    opacity: 0.4;
+    transform: rotate(180deg);
+    transition: 0.3s ease;
+    padding: 55px 20px 55px 20px;
+}
+
+#d_watched {
+    padding: 55px 45px 63px 55px;
+    right: 0px;
+    opacity: 0.4;
+    transform: rotate(0deg);
+    transition: 0.3s ease;
+}
+
+#g_watched:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    transform: rotate(180deg);
+    transition: 0.3s ease;
+}
+
+#d_watched:hover {
     transform: scale(1.1);
     opacity: 1;
     transform: rotate(0deg);

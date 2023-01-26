@@ -99,8 +99,9 @@ while ($user = $req->fetch()) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - LemonFlix</title>
-    <link rel="stylesheet" href="Streaming_style.css">
+    <link rel="stylesheet" href="streaming.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 </head>
 <body>
     <dialog id="popup">
@@ -270,8 +271,10 @@ while ($user = $req->fetch()) {
 
             if (isset($watched)) {
                 echo('
-                    <h2>Reprendre avec le profile de <strong>'.$pseudo.'</strong> -</h2>
-                    <div class="menu">');
+                <h2>Reprendre avec le profile de <strong>'.$pseudo.'</strong> -</h2>
+                <div class="menu" id="watched_section">
+                <div class="watched_container">
+                    ');
                 if(str_contains($watched, '/')) {
                     $arrayWatched = explode("/", $watched);
                     foreach($arrayWatched as $id) {
@@ -319,8 +322,13 @@ while ($user = $req->fetch()) {
                                         </div>
                                     </div>
                                 </div>
-                            </form>');
+                            </form>
+                            ');
                     }
+                    echo('
+                    </div>
+                    <img src="../img/arrow.svg" alt="arrow" class="button" id="d_watched">
+                    <img src="../img/arrow.svg" alt="arrow" class="button" id="g_watched">');
                 } else {
                     echo('
                             <form action="player.php" method="post" class="streaming_form">
@@ -606,6 +614,48 @@ while ($user = $req->fetch()) {
                         </div>
                     </div>
                 </form>
+                <form action="player.php" method="post" class="streaming_form">
+                    <!-- One piece -->
+                    <?php $op = 3 ?>
+                    <div class="videos">
+                        <div class="dropdown">
+                            <input type="image" src="https://i.pinimg.com/originals/ff/6e/b2/ff6eb2820802df2af1e20c85841eb907.jpg" value="Submit" class="animeCase" id="lastOne">
+                            <input type="hidden" name="id" value="<?php echo($op); ?>">
+                            <input type="hidden" name="op" value="yes">
+                            <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
+                            </form>
+                            <div class="dropdown-content">
+                                <form action="index.php" method="post">
+                                    <?php 
+                                        $req = $db->prepare("SELECT list FROM profile$id_profile WHERE pseudo = ?");
+                                        $req->execute(array($pseudo));
+
+                                        while ($user = $req->fetch()) {
+                                            $bddList = $user[0];
+
+                                            if (in_array($op, $arrayList)) {
+                                                echo('
+                                                <input type="hidden" name="delList" value="'.$op.'">
+                                                <input type="submit" value="Supprimer de ma liste" id="list">');
+                                            } else {
+                                                echo('
+                                                <input type="hidden" name="addList" value="'.$op.'">
+                                                <input type="submit" value="Ajouter à ma liste" id="list">');
+                                            }
+                                        }
+
+                                    ?>
+                                </form>
+                                <form action="player.php" method="post" class="streaming_form">
+                                    <input type="submit" value="Regarder" id="play">
+                                    <input type="hidden" name="id" value="<?php echo($op); ?>">
+                                    <input type="hidden" name="op" value="yes">
+                                    <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <img src="../img/arrow.svg" alt="arrow" class="button" id="d">
             <img src="../img/arrow.svg" alt="arrow" class="button" id="g">
@@ -751,9 +801,10 @@ while ($user = $req->fetch()) {
         
     </div>
 
+    <script src="../Netflix/js/carrousel_watch.js"></script>
     <script src="../Netflix/js/coupleCuckoosMenu.js"></script>
     <script src="../Netflix/js/fadeEffect.js"></script>
-    <script src="../Netflix/js/Anime_carrousel.js"></script>
+    <script src="../Netflix/js/carrousel_anime.js"></script>
     <script src="../Netflix/js/searchScript.js"></script>
 </body>
 </html>
