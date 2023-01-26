@@ -167,6 +167,10 @@ h1 {
     margin-left: -45px;
 }
 
+.ajustMargin {
+    margin-left: 45px;
+}
+
 .addBtn:hover {
     border:  #626262 solid 4px;
     margin-bottom: 0px;

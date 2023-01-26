@@ -5,7 +5,7 @@ html {
 
 body {
     overflow: hidden;
-  }
+}
 
 .header{
     display: flex;
@@ -97,4 +97,42 @@ span:hover {
     filter: blur(0px);
     transition: 0.1s;
     cursor: default;
+}
+
+.bottomBtn {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    position:absolute;
+    bottom:25px;
+    width:100%;
+}
+
+#exitBtn {
+    padding: 20px 90px 20px 90px;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: white;
+    transition: 0.1s;
+    border-radius: 10px;
+}
+
+#exitBtn:hover {
+    transform: scale(0.95);
+    transition: 0.1s;
+}
+
+#saveBtn {
+    padding: 20px 90px 20px 90px;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #e50914;
+    color: white;
+    transition: 0.1s;
+    border-radius: 10px;
+}
+
+#saveBtn:hover {
+    transform: scale(0.95);
+    transition: 0.1s;
 }

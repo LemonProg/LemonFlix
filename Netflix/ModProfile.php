@@ -13,7 +13,7 @@ if (!isset($_SESSION['connect'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LemonFlix</title>
-    <link rel="stylesheet" href="stylesModProfil.css">
+    <link rel="stylesheet" href="stylesModProfils.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -67,7 +67,11 @@ if (!isset($_SESSION['connect'])) {
 
                 if ($count < 5) {
                     echo('
-                    <div class="container">
+                    <div class="container ');
+                    if (empty($pseudo)) {
+                        echo('ajustMargin');
+                    } 
+            echo('">
                         <form action="AddProfile.php" id="addForm">
                             <input type="image" class="addBtn" value="Submit">
                             <p id="pseudo">Ajouter un profil</p>

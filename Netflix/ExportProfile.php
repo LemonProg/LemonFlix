@@ -12,7 +12,7 @@ if (!isset($_SESSION['connect'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exporter profile - LemonFlix</title>
-    <link rel="stylesheet" href="stylesExportProfil.css">
+    <link rel="stylesheet" href="stylesExportProfils.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -66,11 +66,27 @@ while ($saved_user = $req->fetch()) {
 
         $req->execute(array($pseudo, $url, $watched, $list, $id_user));
 
-        echo("<h2>Votre Code publique :</h2>");
-        echo("<div class='codeDiv'><span>$savePro_code</span></div>");
+        echo("<h2>Votre Code publique</h2>");
+        echo("<div class='codeDiv'><span id='copyCode'>$savePro_code</span></div>");
     }
     }}}}
 }
 ?>
+
+<div class="bottomBtn">
+    <form action="ModProfile.php" id="exitForm" method='post'>
+        <input type="submit" value="Retour" id="exitBtn" name="exit">
+    </form>
+    <?php 
+    if (!$imported == "true") {
+        echo('<form action="ExportProfile.php" id="saveForm" method="post">
+            <input type="submit" value="Enregister dans le presse-papier" id="saveBtn" name="send">
+            </form>');
+    }
+
+    ?>
+</div>
+
+<script src="../Netflix/js/saveToClip.js"></script>
 </body>
 </html>
