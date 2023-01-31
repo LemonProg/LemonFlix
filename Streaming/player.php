@@ -13,7 +13,7 @@ if (!isset($_SESSION['connect'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LemonFlix</title>
-    <link rel="stylesheet" href="player_style.css">
+    <link rel="stylesheet" href="player_styles.css">
     <link rel="icon" type="image/pngn" href="../img/favicon.png">
 </head>
 <body>
@@ -40,7 +40,12 @@ if (!isset($_SESSION['connect'])) {
                     if(!empty($watchedRecover)) {
                         if (!in_array($id_ep, $watchedArray)) {
                             $arrayLength = sizeof($watchedArray);
-                            $finalPush = $id_ep."/".$watchedRecover;
+
+                            if(!empty($_POST['op'])) {
+                                $finalPush = "op_".$id_ep."/".$watchedRecover;
+                            } else {
+                                $finalPush = $id_ep."/".$watchedRecover;
+                            }
 
                             $req = $db->prepare("UPDATE profile$id_profile SET watched = ? WHERE pseudo = ?");
                             $req->execute(array($finalPush, $pseudo));
@@ -55,8 +60,7 @@ if (!isset($_SESSION['connect'])) {
                     }
 
                 }
-
-                if(!empty($_POST['op'])) {
+                if(str_contains($id_ep, "op_")) {
                     $req = $db->prepare("SELECT * FROM onepiece WHERE ep = ?");
                     $req->execute(array($id_ep));
                 } else {

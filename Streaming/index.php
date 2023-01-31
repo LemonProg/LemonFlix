@@ -279,17 +279,24 @@ while ($user = $req->fetch()) {
                 <div class="menu" id="watched_section">
                 <div class="watched_container">
                     ');
+
                 if(str_contains($watched, '/')) {
                     $arrayWatched = explode("/", $watched);
                     $count = 0;
                     foreach($arrayWatched as $id) {
                         $count++;
-
                         $req = $db->prepare("SELECT * FROM streaming WHERE id = ?");
                         $req->execute(array($id));
-
+                        
                         while ($user = $req->fetch()) {
                             $img = $user['img'];
+                        }
+                        if (str_contains($id, "op")) {
+                            $req = $db->prepare("SELECT * FROM onepiece WHERE ep = ?");
+                            $req->execute(array($id));
+                            while ($userOP = $req->fetch()) {
+                                $img = $userOP['img'];
+                            }     
                         }
                         echo('
                             <form action="player.php" method="post" class="streaming_form">
@@ -344,6 +351,13 @@ while ($user = $req->fetch()) {
                     <img src="../img/arrow.svg" alt="arrow" class="button" id="d_watched">
                     <img src="../img/arrow.svg" alt="arrow" class="button" id="g_watched">');
                 } else {
+                    if (str_contains($watched, "op")) {
+                        $req = $db->prepare("SELECT * FROM onepiece WHERE ep = ?");
+                        $req->execute(array($watched));
+                        while ($userOP = $req->fetch()) {
+                            $img = $userOP['img'];
+                        }     
+                    }
                     echo('
                             <form action="player.php" method="post" class="streaming_form">
                                 <div class="videos removeMargin">
@@ -631,12 +645,11 @@ while ($user = $req->fetch()) {
                 </form>
                 <form action="player.php" method="post" class="streaming_form">
                     <!-- One piece -->
-                    <?php $op = 3 ?>
+                    <?php $op = "op_3"; ?>
                     <div class="videos">
                         <div class="dropdown">
                             <input type="image" src="https://i.pinimg.com/originals/ff/6e/b2/ff6eb2820802df2af1e20c85841eb907.jpg" value="Submit" class="animeCase" id="lastOne">
                             <input type="hidden" name="id" value="<?php echo($op); ?>">
-                            <input type="hidden" name="op" value="yes">
                             <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
                             </form>
                             <div class="dropdown-content">
@@ -664,7 +677,6 @@ while ($user = $req->fetch()) {
                                 <form action="player.php" method="post" class="streaming_form">
                                     <input type="submit" value="Regarder" id="play">
                                     <input type="hidden" name="id" value="<?php echo($op); ?>">
-                                    <input type="hidden" name="op" value="yes">
                                     <input type="hidden" name="user" value="<?php echo($pseudo); ?>">
                                 </form>
                             </div>
@@ -756,6 +768,13 @@ while ($user = $req->fetch()) {
 
                             while ($user = $req->fetch()) {
                                 $img = $user['img'];
+                            }
+                            if (str_contains($id, "op")) {
+                                $req = $db->prepare("SELECT * FROM onepiece WHERE ep = ?");
+                                $req->execute(array($id));
+                                while ($userOP = $req->fetch()) {
+                                    $img = $userOP['img'];
+                                }     
                             }
                             echo('
                                 <form action="player.php" method="post" class="streaming_form">
