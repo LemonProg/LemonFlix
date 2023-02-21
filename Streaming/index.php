@@ -7,6 +7,7 @@ if (!isset($_SESSION['connect'])) {
 require('../src/connect.php');
 
 if (!empty($_POST['user'])) {
+    header("location: index.php");
     $pseudo = htmlspecialchars($_POST['user']);
     if ($_POST['user'] != '') {
         setcookie('pseudoUser', $pseudo, time()+3600*24, '/', '', false, false);
