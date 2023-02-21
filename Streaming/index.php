@@ -836,7 +836,7 @@ while ($user = $req->fetch()) {
         
     </div>
 
-    <script src="../Netflix/js/watched_carrou.js"></script>
+    <script src="../Netflix/js/watch_carrou.js"></script>
     <script src="../Netflix/js/coupleCuckoosMenu.js"></script>
     <script src="../Netflix/js/fadeEffects.js"></script>
     <script src="../Netflix/js/carrousel_anime.js"></script>

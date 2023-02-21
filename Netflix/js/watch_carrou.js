@@ -1,4 +1,4 @@
-nbr_watched = 2;
+nbr_watched = 3;
 p_watched = 0;
 container_watched = document.querySelector(".watched_container");
 section_watched = document.querySelector("#watched_section");
